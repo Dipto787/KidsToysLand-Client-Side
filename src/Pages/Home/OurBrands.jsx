@@ -32,10 +32,10 @@ const OurBrands = () => {
 
     return (
         <div>
-            <h1 className="text-6xl text-center font-semibold">Our Brands</h1>
+            <h1 className="text-6xl text-center my-20 font-semibold border-b-4 p-10 border-orange-600">Our Brands</h1>
             <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-6 ">
                 {
-                    brands.map(brand=> <img className="rounded-xl hover:scale-95 duration-100 cursor-pointer" src={brand.img}></img>)
+                    brands.map(brand=> <img className="rounded-xl hover:scale-105 duration-100 cursor-pointer" src={brand.img}></img>)
                 }
             </div>
         </div>

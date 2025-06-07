@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Why Choose Us?",
+    "tag": "Most Loved",
+    "benefits": [
+      { "text": "Safe & Non-toxic Toys", "enabled": true },
+      { "text": "Fast & Reliable Delivery", "enabled": true },
+      { "text": "Wide Variety for Every Age", "enabled": true },
+      { "text": "Affordable Pricing", "enabled": true },
+      { "text": "Parent-Trusted Quality", "enabled": true }
+    ]
+  },
+  {
+    "title": "Extra Value",
+    "tag": "Best Deal",
+    "benefits": [
+      { "text": "Exciting Discounts & Offers", "enabled": true },
+      { "text": "Free Shipping Over $50", "enabled": true },
+      { "text": "Easy Return Policy", "enabled": true },
+      { "text": "Gift-Wrap Available", "enabled": true },
+      { "text": "Secure Online Payment", "enabled": true }
+    ]
+  },
+  {
+    "title": "Our Service",
+    "tag": "Top Rated",
+    "benefits": [
+      { "text": "Customer Support 7 Days a Week", "enabled": true },
+      { "text": "Same-Day Dispatch", "enabled": true },
+      { "text": "Live Order Tracking", "enabled": true },
+      { "text": "Verified Toy Brands", "enabled": true },
+      { "text": "Eco-Friendly Packaging", "enabled": true }
+    ]
+  }
+]
