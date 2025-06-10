@@ -1,152 +1,152 @@
 [
-    {
-        "name": "Super Speed Car",
-        "img": "https://i.ibb.co/S4TZKLK1/aeb42c9036995c1b350f6cda31cd0669-jpg-400x400q75.jpg",
-        "category": "car",
-        "age": "3+",
-        "price": 850,
-        "brand": "majorette",
-        "sold": 0,
-        "details": "A high-speed pull-back car made with durable plastic, perfect for racing fun on smooth surfaces."
-    },
-    {
-        "name": "Turbo Racer",
-        "img": "https://i.ibb.co/7dpFX4sN/0db6fa7fbed653d3447e05172b1c70b8-jpg-400x400q75.jpg",
-        "category": "car",
-        "age": "4+",
-        "price": 920,
-        "brand": "funskool",
-        "sold": 0,
-        "details": "A colorful, friction-powered toy car designed for indoor races. Easy for kids to grip and drive."
-    },
-    {
-        "name": "Lightning Drift Car",
-        "img": "https://i.ibb.co/GfqHLDrP/b323931552d0eb3c080f73059b7ac7f3-jpg-400x400q75.jpg",
-        "category": "car",
-        "age": "5+",
-        "price": 1150,
-        "brand": "toybilss",
-        "sold": 0,
-        "details": "Sleek design with drift wheels and LED lights. Encourages imaginative play and motor skills."
-    },
-    {
-        "name": "Off-Road Car",
-        "img": "https://i.ibb.co/BVD6mpqX/Sa9903dde6b5645d4bf26cbab93a135b46-jpg-400x400q75.jpg",
-        "category": "car",
-        "age": "6+",
-        "price": 1350,
-        "brand": "challenge accepted",
-        "sold": 0,
-        "details": "A rugged vehicle with large wheels for bumpy surfaces. Ideal for adventurous outdoor play."
-    },
-    {
-        "name": "Electric Race Track",
-        "img": "https://i.ibb.co/23FtZSyW/09aec9949a3fa1b6d348bb64e464e9fd-jpg-400x400q75.jpg",
-        "category": "electric toys",
-        "age": "5+",
-        "price": 1450,
-        "brand": "zepltyr",
-        "sold": 0,
-        "details": "Comes with motorized cars and a looped track. Great for competitive racing with friends."
-    },
-    {
-        "name": "Robot Flash Car",
-        "img": "https://i.ibb.co/S4S02vVW/2ec489f347e6c21f1b4528d4157e3386-jpg-400x400q75.jpg",
-        "category": "electric toys",
-        "age": "6+",
-        "price": 1550,
-        "brand": "winfun",
-        "sold": 0,
-        "details": "Transforms between a robot and car with flashing lights and sounds. A fun 2-in-1 toy."
-    },
-    {
-        "name": "Electric Train Set",
-        "img": "https://i.ibb.co/hRWJC4gF/f775d4a13f4a6165470a65bbb87e3733-jpg-400x400q75.jpg",
-        "category": "electric toys",
-        "age": "4+",
-        "price": 1680,
-        "brand": "frank",
-        "sold": 0,
-        "details": "Includes engine, tracks, and accessories. Runs on batteries and encourages problem-solving."
-    },
-    {
-        "name": "Flying Disc Drone",
-        "img": "https://i.ibb.co/wNKc1sC6/317b2cb2da0730f494dbeac81b692e6b-jpg-400x400q75.jpg",
-        "category": "electric toys",
-        "age": "7+",
-        "price": 1990,
-        "brand": "fisher-price",
-        "sold": 0,
-        "details": "Hand-controlled flying disc drone with sensors. Safe for indoor play and tons of fun."
-    },
-    {
-        "name": "Building Blocks",
-        "img": "https://i.ibb.co/xq0JwD9K/S962b2098e9384a96a9f0ea5e1d15b9dcp-jpg-400x400q75.jpg",
-        "category": "plastic toys",
-        "age": "2+",
-        "price": 450,
-        "brand": "frank",
-        "sold": 0,
-        "details": "Colorful plastic building blocks that help children develop creativity and coordination."
-    },
-    {
-        "name": "Kitchen Set",
-        "img": "https://i.ibb.co/Z1VpbPMK/S8eabdec7f7b84939baa3b20bc3df253fi-jpg-400x400q75-1.jpg",
-        "category": "plastic toys",
-        "age": "3+",
-        "price": 650,
-        "brand": "funskool",
-        "sold": 0,
-        "details": "Miniature kitchen playset with utensils, stove, and accessories. Encourages role play."
-    },
-    {
-        "name": "Toolbox Play Kit",
-        "img": "https://i.ibb.co/F4BGpBq4/b20b7a192c9ce162c8e96319e46afea9-jpg-400x400q75-1.jpg",
-        "category": "plastic toys",
-        "age": "4+",
-        "price": 570,
-        "brand": "zepltyr",
-        "sold": 0,
-        "details": "Includes plastic hammer, wrench, and screws. Perfect for curious little builders."
-    },
-    {
-        "name": "Toy Fruit Set",
-        "img": "https://i.ibb.co/xq0JwD9K/S962b2098e9384a96a9f0ea5e1d15b9dcp-jpg-400x400q75.jpg",
-        "category": "plastic toys",
-        "age": "3+",
-        "price": 380,
-        "brand": "sold",
-        "sold": 0,
-        "details": "A fun toy fruit set made of safe plastic. Teaches kids about healthy food through pretend play."
-    },
-    {
-        "name": "Transformer Robot",
-        "img": "https://i.ibb.co/yFpD74W2/715f271a9e2105e434baf1544a62acc9-jpg-400x400q75-1.jpg",
-        "category": "robots",
-        "age": "6+",
-        "price": 1690,
-        "brand": "challenge accepted",
-        "sold": 0,
-        "details": "Easily transforms between robot and vehicle. Perfect for action-packed stories and battles."
-    },
-    {
-        "name": "Battle Robot",
-        "img": "https://i.ibb.co/XkzG0tPm/56c0b7a59b03f4582d5ad0240c5f62b9-jpg-400x400q75.jpg",
-        "category": "robots",
-        "age": "7+",
-        "price": 1880,
-        "brand": "zepltyr",
-        "sold": 0,
-        "details": "Interactive robot with lights, sounds, and moving parts. Boosts STEM learning and fun."
-    },
-    {
-        "name": "Mini AI Robot",
-        "img": "https://i.ibb.co/nN9K4Yh8/S06bbf53dbbe84fe194495a5e68bbe5153-jpg-400x400q75.jpg",
-        "category": "robots",
-        "age": "8+",
-        "price": 2250,
-        "brand": "winfun",
-        "sold": 0,
-        "details": "Smart robot with voice command, gestures, and dancing modes. A perfect tech toy for kids."
-    }
+  {
+    "name": "Super Speed Car",
+    "img": "https://i.ibb.co/S4TZKLK1/aeb42c9036995c1b350f6cda31cd0669-jpg-400x400q75.jpg",
+    "category": "car",
+    "age": "3+",
+    "price": 850,
+    "brand": "majorette",
+    "sold": 34,
+    "details": "A high-speed pull-back car made with durable plastic, perfect for racing fun on smooth surfaces."
+  },
+  {
+    "name": "Turbo Racer",
+    "img": "https://i.ibb.co/7dpFX4sN/0db6fa7fbed653d3447e05172b1c70b8-jpg-400x400q75.jpg",
+    "category": "car",
+    "age": "4+",
+    "price": 920,
+    "brand": "funskool",
+    "sold": 27,
+    "details": "A colorful, friction-powered toy car designed for indoor races. Easy for kids to grip and drive."
+  },
+  {
+    "name": "Lightning Drift Car",
+    "img": "https://i.ibb.co/GfqHLDrP/b323931552d0eb3c080f73059b7ac7f3-jpg-400x400q75.jpg",
+    "category": "car",
+    "age": "5+",
+    "price": 1150,
+    "brand": "toybilss",
+    "sold": 42,
+    "details": "Sleek design with drift wheels and LED lights. Encourages imaginative play and motor skills."
+  },
+  {
+    "name": "Off-Road Car",
+    "img": "https://i.ibb.co/BVD6mpqX/Sa9903dde6b5645d4bf26cbab93a135b46-jpg-400x400q75.jpg",
+    "category": "car",
+    "age": "6+",
+    "price": 1350,
+    "brand": "challenge accepted",
+    "sold": 19,
+    "details": "A rugged vehicle with large wheels for bumpy surfaces. Ideal for adventurous outdoor play."
+  },
+  {
+    "name": "Electric Race Track",
+    "img": "https://i.ibb.co/23FtZSyW/09aec9949a3fa1b6d348bb64e464e9fd-jpg-400x400q75.jpg",
+    "category": "electric toys",
+    "age": "5+",
+    "price": 1450,
+    "brand": "zepltyr",
+    "sold": 51,
+    "details": "Comes with motorized cars and a looped track. Great for competitive racing with friends."
+  },
+  {
+    "name": "Robot Flash Car",
+    "img": "https://i.ibb.co/S4S02vVW/2ec489f347e6c21f1b4528d4157e3386-jpg-400x400q75.jpg",
+    "category": "electric toys",
+    "age": "6+",
+    "price": 1550,
+    "brand": "winfun",
+    "sold": 37,
+    "details": "Transforms between a robot and car with flashing lights and sounds. A fun 2-in-1 toy."
+  },
+  {
+    "name": "Electric Train Set",
+    "img": "https://i.ibb.co/hRWJC4gF/f775d4a13f4a6165470a65bbb87e3733-jpg-400x400q75.jpg",
+    "category": "electric toys",
+    "age": "4+",
+    "price": 1680,
+    "brand": "frank",
+    "sold": 23,
+    "details": "Includes engine, tracks, and accessories. Runs on batteries and encourages problem-solving."
+  },
+  {
+    "name": "Flying Disc Drone",
+    "img": "https://i.ibb.co/wNKc1sC6/317b2cb2da0730f494dbeac81b692e6b-jpg-400x400q75.jpg",
+    "category": "electric toys",
+    "age": "7+",
+    "price": 1990,
+    "brand": "fisher-price",
+    "sold": 48,
+    "details": "Hand-controlled flying disc drone with sensors. Safe for indoor play and tons of fun."
+  },
+  {
+    "name": "Building Blocks",
+    "img": "https://i.ibb.co/xq0JwD9K/S962b2098e9384a96a9f0ea5e1d15b9dcp-jpg-400x400q75.jpg",
+    "category": "plastic toys",
+    "age": "2+",
+    "price": 450,
+    "brand": "frank",
+    "sold": 65,
+    "details": "Colorful plastic building blocks that help children develop creativity and coordination."
+  },
+  {
+    "name": "Kitchen Set",
+    "img": "https://i.ibb.co/Z1VpbPMK/S8eabdec7f7b84939baa3b20bc3df253fi-jpg-400x400q75-1.jpg",
+    "category": "plastic toys",
+    "age": "3+",
+    "price": 650,
+    "brand": "funskool",
+    "sold": 58,
+    "details": "Miniature kitchen playset with utensils, stove, and accessories. Encourages role play."
+  },
+  {
+    "name": "Toolbox Play Kit",
+    "img": "https://i.ibb.co/F4BGpBq4/b20b7a192c9ce162c8e96319e46afea9-jpg-400x400q75-1.jpg",
+    "category": "plastic toys",
+    "age": "4+",
+    "price": 570,
+    "brand": "zepltyr",
+    "sold": 32,
+    "details": "Includes plastic hammer, wrench, and screws. Perfect for curious little builders."
+  },
+  {
+    "name": "Toy Fruit Set",
+    "img": "https://i.ibb.co/xq0JwD9K/S962b2098e9384a96a9f0ea5e1d15b9dcp-jpg-400x400q75.jpg",
+    "category": "plastic toys",
+    "age": "3+",
+    "price": 380,
+    "brand": "sold",
+    "sold": 44,
+    "details": "A fun toy fruit set made of safe plastic. Teaches kids about healthy food through pretend play."
+  },
+  {
+    "name": "Transformer Robot",
+    "img": "https://i.ibb.co/yFpD74W2/715f271a9e2105e434baf1544a62acc9-jpg-400x400q75-1.jpg",
+    "category": "robots",
+    "age": "6+",
+    "price": 1690,
+    "brand": "challenge accepted",
+    "sold": 39,
+    "details": "Easily transforms between robot and vehicle. Perfect for action-packed stories and battles."
+  },
+  {
+    "name": "Battle Robot",
+    "img": "https://i.ibb.co/XkzG0tPm/56c0b7a59b03f4582d5ad0240c5f62b9-jpg-400x400q75.jpg",
+    "category": "robots",
+    "age": "7+",
+    "price": 1880,
+    "brand": "zepltyr",
+    "sold": 47,
+    "details": "Interactive robot with lights, sounds, and moving parts. Boosts STEM learning and fun."
+  },
+  {
+    "name": "Mini AI Robot",
+    "img": "https://i.ibb.co/nN9K4Yh8/S06bbf53dbbe84fe194495a5e68bbe5153-jpg-400x400q75.jpg",
+    "category": "robots",
+    "age": "8+",
+    "price": 2250,
+    "brand": "winfun",
+    "sold": 53,
+    "details": "Smart robot with voice command, gestures, and dancing modes. A perfect tech toy for kids."
+  }
 ]

@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import MostSoldEdToys from "./MostSoldedToys";
 import OurBenefits from "./OurBenefits";
 import OurBrands from "./OurBrands";
 import OurToys from "./OurToys";
@@ -24,6 +25,9 @@ const Home = () => {
             </div>
             <div className="mt-10 ">
                <OurBenefits></OurBenefits>
+            </div>
+            <div className="mt-10 ">
+               <MostSoldEdToys></MostSoldEdToys>
             </div>
 
         </div>

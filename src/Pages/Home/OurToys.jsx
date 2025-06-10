@@ -11,6 +11,14 @@ const OurToys = () => {
                 setToys(res.data)
             })
     }, [])
+    let categories = [];
+    for (let toy of toys) {
+        if (!categories.includes(toy.category)){
+            categories.push(toy.category)
+        }
+    }
+
+    console.log(categories);
     return (
         <div>
             <h1 className="text-6xl text-center my-20 font-semibold border-b-4 p-10 border-blue-600 ">Our Toys</h1>
@@ -27,9 +35,9 @@ const OurToys = () => {
                             <p>{toy.details}</p>
                             <div className=" ">
                                 <div className="" >
-                                    <p className="flex text-lg gap-2"> Brand : <p className="text-red-500">{toy.brand}</p></p>
+                                    <p className="flex text-lg gap-2"> Brand : <span className="text-red-500">{toy.brand}</span></p>
 
-                                    <p className="flex gap-2  text-lg"> sold : <p className="text-red-500">{toy.sold}</p></p>
+                                    <p className="flex gap-2  text-lg"> sold : <span className="text-red-500">{toy.sold}</span></p>
                                 </div>
                             </div>
                             <div className="card-actions  w-full justify-end">
@@ -39,9 +47,9 @@ const OurToys = () => {
                     </div>)
                 }
             </div>
-                <div className="text-center px-72 my-6">
-                    <Link className="btn bg-pink-600 w-full  text-lg p-6 rounded  text-white font-semibold">See All <FaAngleDoubleRight size={24}></FaAngleDoubleRight></Link>
-                </div>
+            <div className="text-center px-72 my-6">
+                <Link className="btn bg-pink-600 w-full  text-lg p-6 rounded  text-white font-semibold">See All <FaAngleDoubleRight size={24}></FaAngleDoubleRight></Link>
+            </div>
         </div>
     );
 };
