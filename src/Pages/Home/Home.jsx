@@ -13,25 +13,25 @@ const Home = () => {
                 <Banner></Banner>
             </div>
 
-            <div className="mt-10 ">
+            <div className="lg:mt-10 mt-0 ">
                <OurBrands></OurBrands>
             </div>
 
-            <div className="mt-10 ">
+            <div className="lg:mt-10 mt-0 ">
                <OurToys></OurToys>
             </div>
 
             <div className="mt-32 ">
                <SubBanner></SubBanner>
             </div>
-            <div className="mt-10 ">
+            <div className="lg:mt-10 mt-0 ">
                <OurBenefits></OurBenefits>
             </div>
-            <div className="mt-10 ">
+            <div className="lg:mt-10 mt-0 ">
                <MostSoldEdToys></MostSoldEdToys>
             </div>
 
-            <div className="mt-10 ">
+            <div className="lg:mt-10 mt-0 ">
               <TestimonalSwiper></TestimonalSwiper>
             </div>
 

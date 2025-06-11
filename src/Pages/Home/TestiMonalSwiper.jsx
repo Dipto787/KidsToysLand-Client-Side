@@ -18,11 +18,11 @@ const TestimonalSwiper = () => {
 
     console.log(reviews)
     return (
-        <div className='mb-10'>
-            <h1 className="text-6xl text-center my-20 font-semibold border-b-4 p-10 border-red-600 ">Testimonial</h1>
+        <div className='mb-10 px-2 lg:px-0'>
+            <h1 className="lg:text-6xl text-4xl text-center my-4 lg:my-20  mb-3 font-semibold border-b-4 p-10 border-red-600 ">Testimonial</h1>
             <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
                 {
-                    reviews.map(review => <SwiperSlide>
+                    reviews.map(review => <SwiperSlide className='px-4'>
                         <img className='mx-auto' src={TasteyMonal} alt="" />
                         <div className='space-y-5'>
                             <h2 className='text-center text-2xl font-semibold'>Product Name : {review.product}</h2>

@@ -32,7 +32,7 @@ const Navbar = () => {
                            {Links}
                         </ul>
                     </div>
-                    <Link className="btn max-w-48 mt-7 text-xl"><img src={logo} alt="" /></Link>
+                    <Link className="btn max-w-48   text-xl"><img src={logo} alt="" /></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

@@ -11,11 +11,11 @@ const OurBenefits = () => {
             })
     }, [])
     return (
-        <div>
-            <h1 className="text-6xl text-center my-20 font-semibold border-b-4 p-10 border-green-600">Our Benefits</h1>
-            <div className="grid grid-cols-1 lg:grid-cols-3">
+        <div className="px-2 lg:px-0">
+            <h1 className="lg:text-6xl text-4xl text-center my-4 lg:my-20  font-semibold border-b-4 p-10 border-green-600">Our Benefits</h1>
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
                 {
-                    benefits.map(benefit => <div className="card w-96 bg-base-100 shadow-sm">
+                    benefits.map(benefit => <div className=" border-2 rounded-lg shadow-lg border-orange-600 ">
                         <div className="card-body">
                             <span className="badge badge-xs badge-warning">{benefit.tag}</span>
                             <div className="flex justify-between">
