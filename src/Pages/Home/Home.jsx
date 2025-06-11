@@ -4,6 +4,7 @@ import OurBenefits from "./OurBenefits";
 import OurBrands from "./OurBrands";
 import OurToys from "./OurToys";
 import SubBanner from "./SubBanner";
+import TestimonalSwiper from "./TestiMonalSwiper";
 
 const Home = () => {
     return (
@@ -28,6 +29,10 @@ const Home = () => {
             </div>
             <div className="mt-10 ">
                <MostSoldEdToys></MostSoldEdToys>
+            </div>
+
+            <div className="mt-10 ">
+              <TestimonalSwiper></TestimonalSwiper>
             </div>
 
         </div>

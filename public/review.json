@@ -1,0 +1,92 @@
+[
+  {
+    "product": "Super Speed Car",
+    "author": "Riyan M.",
+    "rating": 4.6,
+    "review": "My son loves this car! It’s fast and durable."
+  },
+  {
+    "product": "Turbo Racer",
+    "author": "Anika S.",
+    "rating": 4.4,
+    "review": "Great colors and smooth movement. Good buy!"
+  },
+  {
+    "product": "Lightning Drift Car",
+    "author": "Tuhin K.",
+    "rating": 4.7,
+    "review": "The LED lights are awesome. Perfect for evening fun."
+  },
+  {
+    "product": "Off-Road Car",
+    "author": "Sadia N.",
+    "rating": 4.3,
+    "review": "Strong wheels and good for rough surfaces."
+  },
+  {
+    "product": "Electric Race Track",
+    "author": "Rafi A.",
+    "rating": 4.8,
+    "review": "Exciting racing game. Kids love the loops!"
+  },
+  {
+    "product": "Robot Flash Car",
+    "author": "Mahi Z.",
+    "rating": 4.5,
+    "review": "Very cool! My kid enjoys switching between robot and car."
+  },
+  {
+    "product": "Electric Train Set",
+    "author": "Ishita D.",
+    "rating": 4.2,
+    "review": "Good set for learning and play. Batteries last well."
+  },
+  {
+    "product": "Flying Disc Drone",
+    "author": "Shanto B.",
+    "rating": 4.6,
+    "review": "Works great indoors. Fun and safe drone for kids."
+  },
+  {
+    "product": "Building Blocks",
+    "author": "Ovi R.",
+    "rating": 4.9,
+    "review": "Very colorful and engaging. Helps with creativity."
+  },
+  {
+    "product": "Kitchen Set",
+    "author": "Mira J.",
+    "rating": 4.7,
+    "review": "Adorable little set. Perfect for pretend cooking."
+  },
+  {
+    "product": "Toolbox Play Kit",
+    "author": "Hasib N.",
+    "rating": 4.3,
+    "review": "My nephew enjoys fixing things with this kit!"
+  },
+  {
+    "product": "Toy Fruit Set",
+    "author": "Toma K.",
+    "rating": 4.4,
+    "review": "Cute and educational. Helps teach healthy habits."
+  },
+  {
+    "product": "Transformer Robot",
+    "author": "Fahim S.",
+    "rating": 4.5,
+    "review": "Transforms easily and looks cool. Great for storytelling."
+  },
+  {
+    "product": "Battle Robot",
+    "author": "Nadia R.",
+    "rating": 4.6,
+    "review": "Sounds and lights are impressive. My kid is obsessed!"
+  },
+  {
+    "product": "Mini AI Robot",
+    "author": "Zahin H.",
+    "rating": 4.9,
+    "review": "Voice commands work well. Feels like a real assistant."
+  }
+]
