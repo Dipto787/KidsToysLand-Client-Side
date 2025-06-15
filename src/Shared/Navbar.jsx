@@ -2,14 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/logos.png'
 const Navbar = () => {
     let Links = <>
-        <li><NavLink>Home</NavLink></li>
-        <li><NavLink>Our Toys</NavLink></li>
-        <li><NavLink>About Us</NavLink></li>
-        <li><NavLink></NavLink></li>
+        <li><NavLink to={'/'}>Home</NavLink></li>
+        <li><NavLink to={'/our-toys'}>Our Toys</NavLink></li>
+        <li><NavLink to={'/About-Us'}>About Us</NavLink></li> 
     </>;
     return (
-        <div>
-            <div className="navbar px-10 bg-base-100">
+        <div className="pb-20">
+            <div className="navbar px-10 fixed w-full z-30 bg-slate-100  bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

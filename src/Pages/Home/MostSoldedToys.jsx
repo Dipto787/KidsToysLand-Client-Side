@@ -6,18 +6,18 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import { Pagination } from 'swiper/modules';
+import UseAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 const MostSoldEdToys = () => {
-  const [toys, setToys] = useState([]);
+  let axiosSecure = UseAxiosSecure();
 
-  useEffect(() => {
-    axios.get('Toys.json')
-      .then(res => {
-        // Sort from highest sold to lowest sold
-        const sorted = res.data.sort((a, b) => b.sold - a.sold);
-        setToys(sorted);
-      })
-
-  }, []);
+  let { data: toys = [] } = useQuery({
+    queryKey: ['toys'],
+    queryFn: async () => {
+      let { data } = await axiosSecure.get('/all-toys');
+      return data;
+    }
+  })
 
   return (
     <div className="px-2 lg:px-0">

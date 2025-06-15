@@ -2,49 +2,31 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import UseAxiosSecure from "../../hooks/useAxiosSecure";
+import ToysCard from "../../Shared/ToysCard";
+import Spinner from "../../Shared/Spinner";
 
 const OurToys = () => {
-    let [toys, setToys] = useState([]);
-    useEffect(() => {
-        axios.get('Toys.json')
-            .then(res => {
-                setToys(res.data)
-            })
-    }, [])
-    let categories = [];
-    for (let toy of toys) {
-        if (!categories.includes(toy.category)){
-            categories.push(toy.category)
+    let axiosSecure = UseAxiosSecure();
+    let { data: toys = [], isLoading } = useQuery({
+        queryKey: ['toys'],
+        queryFn: async () => {
+            let { data } = await axiosSecure.get('/all-toys');
+            return data;
         }
-    }
-
-    console.log(categories);
+    })
+    console.log(toys)
     return (
         <div className="px-4 lg:px-0">
             <h1 className="lg:text-6xl text-4xl text-center my-4 lg:my-20 font-semibold border-b-4 p-10 border-blue-600 ">Our Toys</h1>
+            
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                 {
-                    toys.map(toy => <div className="flex flex-col h-full border rounded-lg shadow-md">
-                        <figure>
-                            <img
-                                src={toy.img}
-                                alt="Shoes" />
-                        </figure>
-                        <div className="card-body flex flex-col flex-grow">
-                            <h2 className="card-title">{toy.name}</h2>
-                            <p>{toy.details}</p>
-                            <div className=" ">
-                                <div className="" >
-                                    <p className="flex text-lg gap-2"> Brand : <span className="text-red-500">{toy.brand}</span></p>
+                    isLoading ? <Spinner></Spinner> :
 
-                                    <p className="flex gap-2  text-lg"> sold : <span className="text-red-500">{toy.sold}</span></p>
-                                </div>
-                            </div>
-                            <div className="card-actions  w-full justify-end">
-                                <button className="btn w-full mt-6 btn-primary">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>)
+                     toys.slice(0,7).map(toy => <ToysCard toy={toy}></ToysCard>)
+
                 }
             </div>
             <div className="text-center lg:px-72 my-6">
