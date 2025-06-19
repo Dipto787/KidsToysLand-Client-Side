@@ -14,7 +14,7 @@ const MostSoldEdToys = () => {
   let { data: toys = [] } = useQuery({
     queryKey: ['toys'],
     queryFn: async () => {
-      let { data } = await axiosSecure.get('/all-toys');
+      let { data } = await axiosSecure.get('/our-toys');
       return data;
     }
   })

@@ -3,6 +3,7 @@ import Root from "../Root/Root";
 import Home from "../Pages/Home/Home";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import OurToys from "../Pages/OurToys/AllToys";
+import AuthenTication from "../Pages/Authentication/AuthenTication";
 
 const Routes = createBrowserRouter([
     {
@@ -19,8 +20,12 @@ const Routes = createBrowserRouter([
                 element: <AboutUs></AboutUs>
             },
             {
-                path:'/our-toys',
-                element:<OurToys></OurToys>
+                path: '/our-toys',
+                element: <OurToys></OurToys>
+            },
+            {
+                path: '/verify-checkout',
+                element:<AuthenTication></AuthenTication>
             }
         ]
     }

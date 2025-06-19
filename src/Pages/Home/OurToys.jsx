@@ -12,7 +12,7 @@ const OurToys = () => {
     let { data: toys = [], isLoading } = useQuery({
         queryKey: ['toys'],
         queryFn: async () => {
-            let { data } = await axiosSecure.get('/all-toys');
+            let { data } = await axiosSecure.get('/our-toys');
             return data;
         }
     })
