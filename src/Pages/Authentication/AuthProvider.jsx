@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import app from "./firebase.config";
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import UseAxiosSecure from "../../hooks/useAxiosSecure";
 
 export let auth = getAuth(app);
 export let AuthContext = createContext(null);
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
+    let axiosSecure = UseAxiosSecure();
     let [loading, setLoading] = useState(true);
     let [user, setUser] = useState(null);
 
@@ -23,9 +25,14 @@ const AuthProvider = ({children}) => {
             photoURL: photo
         })
     }
-    let logout = (auth) => {
+    let logout = () => {
         setLoading(true);
         return signOut(auth);
+    }
+
+    let getToken = async (email) => {
+        let { data } = await axiosSecure.post('/jwt', {email});
+        console.log(data)
     }
 
     useEffect(() => {
@@ -33,6 +40,9 @@ const AuthProvider = ({children}) => {
             console.log(currentUser)
             setUser(currentUser);
             setLoading(false);
+            if (currentUser) {
+                getToken(currentUser.email);
+            }
         })
 
         return () => unSubscribe();
@@ -49,10 +59,10 @@ const AuthProvider = ({children}) => {
     };
 
     return (
-          <AuthContext.Provider value={authInfo} >
-              {children}
-          </AuthContext.Provider>
-      )
+        <AuthContext.Provider value={authInfo} >
+            {children}
+        </AuthContext.Provider>
+    )
 
 };
 
