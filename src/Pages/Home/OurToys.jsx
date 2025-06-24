@@ -12,20 +12,24 @@ const OurToys = () => {
     let { data: toys = [], isLoading } = useQuery({
         queryKey: ['toys'],
         queryFn: async () => {
-            let { data } = await axiosSecure.get('/our-toys');
+            let { data } = await axiosSecure.get('/toys');
             return data;
         }
     })
-    console.log(toys)
+    console.log( 'dipto boss is fair now',toys)
     return (
         <div className="px-4 lg:px-0">
             <h1 className="lg:text-6xl text-4xl text-center my-4 lg:my-20 font-semibold border-b-4 p-10 border-blue-600 ">Our Toys</h1>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                {
+                { 
+                Array.isArray(toys) ?
                     isLoading ? <Spinner></Spinner> :
 
                      toys.slice(0,7).map(toy => <ToysCard toy={toy}></ToysCard>)
+
+
+                     : undefined
 
                 }
             </div>

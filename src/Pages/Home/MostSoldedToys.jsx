@@ -14,7 +14,7 @@ const MostSoldEdToys = () => {
   let { data: toys = [] } = useQuery({
     queryKey: ['toys'],
     queryFn: async () => {
-      let { data } = await axiosSecure.get('/our-toys');
+      let { data } = await axiosSecure.get('/toys');
       return data;
     }
   })
@@ -47,19 +47,22 @@ const MostSoldEdToys = () => {
           className="mySwiper"
         >
           {
-            toys.slice(0, 10).map(toy => <SwiperSlide><div className="mb-4 shadow-xl">
-              <figure>
-                <img
-                  className="h-80"
-                  src={toy.img}
-                  alt="Shoes" />
-              </figure>
-              <div className="card-body ">
-                <h2 className="card-title">{toy.name}</h2>
-                <p className="text-xl font-semibold  text-blue-600">Sold : {toy.sold}</p>
+            Array.isArray(toys) ?
+              toys.slice(0, 10).map(toy => <SwiperSlide><div className="mb-4 shadow-xl">
+                <figure>
+                  <img
+                    className="h-80"
+                    src={toy.img}
+                    alt="Shoes" />
+                </figure>
+                <div className="card-body ">
+                  <h2 className="card-title">{toy.name}</h2>
+                  <p className="text-xl font-semibold  text-blue-600">Sold : {toy.sold}</p>
+                </div>
               </div>
-            </div>
-            </SwiperSlide>)
+              </SwiperSlide>)
+
+              : undefined
           }
         </Swiper>
       </div>

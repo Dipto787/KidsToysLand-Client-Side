@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import app from "./firebase.config";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updatePassword, updateProfile } from "firebase/auth";
 import UseAxiosSecure from "../../hooks/useAxiosSecure";
 
 export let auth = getAuth(app);
@@ -25,13 +25,23 @@ const AuthProvider = ({ children }) => {
             photoURL: photo
         })
     }
+
+    let updateUserPassword = (newPassword) => {
+        setLoading(true);
+        return updatePassword(auth.currentUser, newPassword);
+    }
+
     let logout = () => {
         setLoading(true);
         return signOut(auth);
     }
 
     let getToken = async (email) => {
-        let { data } = await axiosSecure.post('/jwt', {email});
+        let { data } = await axiosSecure.post('/jwt', { email });
+        console.log(data)
+    }
+    let saveUser = async (user) => {
+        let { data } = await axiosSecure.post('/users', user);
         console.log(data)
     }
 
@@ -39,6 +49,7 @@ const AuthProvider = ({ children }) => {
         let unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log(currentUser)
             setUser(currentUser);
+            saveUser(currentUser);
             setLoading(false);
             if (currentUser) {
                 getToken(currentUser.email);
@@ -55,7 +66,8 @@ const AuthProvider = ({ children }) => {
         logout,
         user,
         loading,
-        setLoading
+        setLoading,
+        updateUserPassword
     };
 
     return (

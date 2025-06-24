@@ -1,32 +1,37 @@
+import StarRatings from 'react-star-ratings';
 import notFound from '../assets/cards/card-4.webp'
-const ToysCard = ({ toy }) => {  
+import { Link } from 'react-router-dom';
+const ToysCard = ({ toy }) => {
     return (
-        <div className=''>
-       
-            <div className="flex flex-col h-full border rounded-lg shadow-md">
+        <Link to={`/our-toys/${toy._id}`} className='hover:scale-105 block cursor-pointer duration-150 hover:shadow-none'>
+
+            <div className="flex flex-col p-5 h-full border rounded-lg hover:shadow-2xl shadow-md">
                 <figure>
                     <img
-                        className="mx-auto"
-                        src={toy.img ? toy.img : notFound}
+                        className="mx-auto h-72"
+                        src={toy?.img}
                         alt="Shoes" />
                 </figure>
                 <div className="card-body flex flex-col flex-grow">
-                    <h2 className="card-title">{toy.name}</h2>
-                    <p>{toy.details}</p>
-                    <div className=" ">
-                        <div className="" >
-                            <p className="flex text-lg gap-2"> Brand : <span className="text-red-500">{toy.brand}</span></p>
+                    <h2 className="card-title">{toy?.name}</h2>
+                    <p>{toy?.details}</p>
+                    <div className='font-semibold'>
+                        <p className="text-[#f7a173] text-xl"> ${toy?.price}</p>
+                        <p className='text-lg flex gap-4 '>{toy?.sold} sold <span className='text-slate-300'>|</span>    <span className='  flex'> 
+                            <StarRatings 
+                            rating={toy?.rating}
+                            starRatedColor="#faca51" 
+                            starDimension='15px'
+                            starSpacing='2px'
+                            numberOfStars={6}
+                            name='rating'
+                        /></span>({toy?.rating})</p>
 
-                            <p className="flex gap-2  text-lg"> sold : <span className="text-red-500">{toy.sold}</span></p>
-                        </div>
                     </div>
-
-                    <div className="card-actions  w-full justify-end">
-                        <button className="btn w-full mt-6 btn-primary">Add To Cart</button>
-                    </div>
+                        <span className='text-right font-normal opacity-70'>Dinajpur</span>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

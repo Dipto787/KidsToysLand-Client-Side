@@ -2,16 +2,23 @@ import { Link, NavLink } from "react-router-dom";
 import logo from '../assets/logos.png'
 import { useContext } from "react";
 import { AuthContext } from "../Pages/Authentication/AuthProvider";
+import { IoCart } from "react-icons/io5";
+import UseAxiosSecure from "../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import useCart from "../hooks/useCart";
 const Navbar = () => {
+    let [cart,refetch] = useCart();
     let { user, loading, logout } = useContext(AuthContext);
     let handleLogout = () => {
         logout();
-    }
+    } 
     let Links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/our-toys'}>Our Toys</NavLink></li>
         <li><NavLink to={'/About-Us'}>About Us</NavLink></li>
-        {user && <li><NavLink to={'/About-Us'}>Dashboard</NavLink></li>}
+        {user && <><li><NavLink to={'/dashboard'}>Dashboard</NavLink></li> <div className="relative"><IoCart size={28} />
+            <p className="absolute text-lg  -right-5  text-white font-bold  -top-3"><span className="bg-red-500 rounded-full px-2 py-1 ">{cart.length}</span></p>
+        </div></>}
     </>;
     console.log(loading)
     return (
@@ -65,7 +72,7 @@ const Navbar = () => {
                                     tabIndex={0}
                                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
 
-                                    <li><Link>Profile</Link></li>
+                                    <li><Link to={'/my-profile'}>My Profile</Link></li>
                                     <li onClick={handleLogout} className=""><Link>Logout</Link></li>
                                 </ul>
                             </div>

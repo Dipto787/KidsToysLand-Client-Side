@@ -4,7 +4,22 @@ import Spinner from "../../Shared/Spinner";
 import ToysCard from "../../Shared/ToysCard";
 import { useEffect, useState } from "react";
 import notFound from '../../assets/not found/no found.png'
+import { useNavigate, useSearchParams } from "react-router-dom";
+import queryString from "query-string";
+let brands = [
+
+    { "brand": "Frank" },
+    { "brand": "Winfun" },
+    { "brand": "Funskool" },
+    { "brand": "Majorette" },
+    { "brand": "Toybilss" },
+    { "brand": "Fisher-Price" },
+    { "brand": "Challenge Accepted" }
+
+]
 const AllToys = () => {
+
+    let navigate = useNavigate(); 
     let axiosSecure = UseAxiosSecure();
     const [CurrentPage, setPage] = useState(0);
     const [perPage, setPerPage] = useState(8);
@@ -15,12 +30,9 @@ const AllToys = () => {
     useEffect(() => {
 
         axiosSecure.get(`/toys-count?brand=${brand}&&search=${search}&&age=${age}`).then(res => {
-            setCount(res.data.count);
-            setPage(0);
+            setCount(res.data.count); 
         });
-
-
-
+        setPage(0)
 
     }, [brand, search, age]);
 
@@ -29,6 +41,7 @@ const AllToys = () => {
         queryKey: ['toys', CurrentPage, perPage, brand, search, age],
         queryFn: async () => {
             let { data } = await axiosSecure.get(`/our-toys?page=${CurrentPage}&&size=${perPage}&&brand=${brand}&&search=${search}&&age=${age}`);
+              
             return data;
         }
     })
@@ -36,23 +49,27 @@ const AllToys = () => {
 
 
     let pages = [...Array(Math.ceil(count / perPage)).keys()];
-
+    useEffect(() => {
+        const query = {
+            page: CurrentPage,
+            brand: brand || undefined,
+            age: age || undefined,
+            search: search || undefined
+        };
+        const newUrl = queryString.stringifyUrl({ url: "/our-toys", query });
+        navigate(newUrl, { replace: true }); 
+    }, [brand, age, search, CurrentPage]);
     return (
         <div>
             <div className='flex  px-3 flex-col'>
-                <div className="my-10 lg:flex flex-col lg:flex-row  bg-purple-300 p-5 rounded-lg justify-between">
+                <div className="my-10 lg:flex flex-col lg:flex-row  bg-[#f85606] p-5 rounded-lg justify-between">
                     <div className="hidden lg:flex">
                         <select onChange={(e) => setBrand(e.target.value)} className="border-2 border-orange-400 p-2" defaultValue={'Select Brand'} name="brand" id="">
                             <option disabled>Select Brand</option>
-                            <option value="funskool">funskool</option>
-                            <option value="toybilss">toybilss</option>
-                            <option value="challenge accepted">challenge accepted</option>
-                            <option value="winfun">winfun</option>
-                            <option value="frank">frank</option>
-                            <option value="fisher-price">fisher-price</option>
-                            <option value="majorette">majorette</option>
-                            <option value="zepltyr">zepltyr</option>
-                            <option value="sold">sold</option>
+
+                            {
+                                brands.map(brand => <option value={brand.brand}>{brand.brand}</option>)
+                            }
 
                         </select>
                     </div>
@@ -90,7 +107,7 @@ const AllToys = () => {
 
                 </div>
 
-                <div  className="flex lg:hidden justify-between px-10 mb-5">
+                <div className="flex lg:hidden justify-between px-10 mb-5">
                     <div>
                         <select onChange={(e) => setBrand(e.target.value)} className="border-2 border-orange-400 p-2" defaultValue={'Select Brand'} name="brand" id="">
                             <option disabled>Select Brand</option>
