@@ -3,7 +3,7 @@ import notFound from '../assets/cards/card-4.webp'
 import { Link } from 'react-router-dom';
 const ToysCard = ({ toy }) => {
     return (
-        <Link to={`/our-toys/${toy._id}`} className='hover:scale-105 block cursor-pointer duration-150 hover:shadow-none'>
+        <Link to={`/our-toys/${toy._id}`} className='hover:scale-105 block cursor-pointer duration-300 hover:shadow-none'>
 
             <div className="flex flex-col p-5 h-full border rounded-lg hover:shadow-2xl shadow-md">
                 <figure>

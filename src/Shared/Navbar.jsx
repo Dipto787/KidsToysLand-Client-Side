@@ -6,19 +6,37 @@ import { IoCart } from "react-icons/io5";
 import UseAxiosSecure from "../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useCart from "../hooks/useCart";
+import IsAdmin from "../hooks/isAdmin";
+import { IoIosNotifications } from "react-icons/io";
 const Navbar = () => {
-    let [cart,refetch] = useCart();
+    let [cart, refetch] = useCart();
+    let [isAdmin, isLoading] = IsAdmin();
     let { user, loading, logout } = useContext(AuthContext);
     let handleLogout = () => {
         logout();
-    } 
+    }
     let Links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/our-toys'}>Our Toys</NavLink></li>
         <li><NavLink to={'/About-Us'}>About Us</NavLink></li>
-        {user && <><li><NavLink to={'/dashboard'}>Dashboard</NavLink></li> <div className="relative"><IoCart size={28} />
-            <p className="absolute text-lg  -right-5  text-white font-bold  -top-3"><span className="bg-red-500 rounded-full px-2 py-1 ">{cart.length}</span></p>
-        </div></>}
+        {user && <><li><NavLink to={'/dashboard/home'}>Dashboard</NavLink></li>
+
+
+            {
+                isAdmin ?
+
+                    <NavLink to={'/dashboard/notifications x'} className="relative"><IoIosNotifications size={28} />
+                        <p className="absolute text-lg  -right-5  text-white font-bold  -top-3"><span className="bg-red-500 rounded-full px-2 py-1 ">{cart.length}</span></p>
+                    </NavLink>
+                    :
+                    <NavLink to={'/dashboard/my-order'} className="relative"><IoCart size={28} />
+                        <p className="absolute text-lg  -right-5  text-white font-bold  -top-3"><span className="bg-blue-500 rounded-full px-2 py-1 ">{cart.length}</span></p>
+                    </NavLink>
+
+            }
+
+
+        </>}
     </>;
     console.log(loading)
     return (
@@ -61,12 +79,19 @@ const Navbar = () => {
 
                         user ?
                             <div className="dropdown dropdown-end">
-                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                    <div className="w-10 rounded-full">
-                                        <img
-                                            alt="user img"
-                                            src={user?.photoURL} />
+                                <div className="flex gap-5 items-center">
+                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full">
+                                            <img
+                                                alt="user img"
+                                                src={user?.photoURL} />
+                                        </div>
                                     </div>
+                                    {
+                                        !isAdmin && <NavLink to={'/dashboard/notifications x'} className="relative"><IoIosNotifications size={33} />
+                                            <p className="absolute text-lg  -right-4  text-white font-bold  -top-3"><span className="bg-red-500 rounded-full px-2 py-1 ">{cart.length}</span></p>
+                                        </NavLink>
+                                    }
                                 </div>
                                 <ul
                                     tabIndex={0}

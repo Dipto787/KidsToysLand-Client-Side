@@ -1,54 +1,82 @@
 import { BsFillHouseFill } from "react-icons/bs";
 import { CiShoppingCart } from "react-icons/ci";
-import { FaAmazonPay } from "react-icons/fa";
+import { FaAmazonPay, FaBookmark, FaCcAmazonPay } from "react-icons/fa";
+import { FcPaid } from "react-icons/fc";
 import { IoMdHome } from "react-icons/io";
+import { IoCart } from "react-icons/io5";
 import { MdDiscount, MdDownloadForOffline, MdLogout } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
+import useCart from "../../hooks/useCart";
+import { useContext } from "react";
+import { AuthContext } from "../Authentication/AuthProvider";
+import IsAdmin from "../../hooks/isAdmin";
+import Spinner from "../../Shared/Spinner";
 
 const DashboardLayout = () => {
+    let [cart] = useCart();
+    let [isAdmin, isLoading] = IsAdmin();
+    console.log('THAT IS THE CRAZY TIME', isAdmin)
+    let { logout } = useContext(AuthContext);
+
+    if (isLoading) {
+        return <Spinner />;
+    }
     return (
         <div>
-            <div className="flex gap-10">
-                <div className="bg-[#edf2f4] h-screen w-[18%]">
-                    <ul className="space-y-5 p-8">
-                        <li ><NavLink className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium 
-              ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
-                        }><IoMdHome size={22} /> User Home</NavLink></li>
+            <div className="flex h-screen gap-10">
+                <div className="bg-[#edf2f4] h-full w-[21%]">
 
-                        <li ><NavLink to={'my-order'} className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium 
-              ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
-                        }><CiShoppingCart size={22} />My Order</NavLink></li>
+                    {
 
-                        <li ><NavLink to={'wish-list'} className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium 
+                        isAdmin === 'true' ?
+                            <ul className="space-y-5 p-5 text-lg">
+                                <li ><NavLink to={'/dashboard/home'} className={({ isActive }) =>
+                                    `flex items-center gap-2 px-3 py-2 rounded-lg  font-medium 
               ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
-                        }><MdDownloadForOffline size={22} />WishList</NavLink></li>
-
-                        <li ><NavLink to={'pay-history'} className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium 
+                                }><IoMdHome size={24} /> User Home</NavLink></li>
+                            </ul>
+                            :
+                            <ul className="space-y-5 p-5 text-lg">
+                                <li ><NavLink to={'/dashboard/home'} className={({ isActive }) =>
+                                    `flex items-center gap-2 px-3 py-2 rounded-lg  font-medium 
               ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
-                        }><FaAmazonPay size={22} />Payment History</NavLink></li>
+                                }><IoMdHome size={24} /> User Home</NavLink></li>
 
-                        <li ><NavLink to={'discount'} className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium 
+                                <li ><NavLink to={'my-order'} className={({ isActive }) =>
+                                    `flex items-center gap-2 px-3 py-2 rounded-lg  font-medium 
               ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
-                        }><MdDiscount size={22} />Get A Discount</NavLink></li>
+                                }><IoCart size={24} />My Order :      ({cart.length})</NavLink></li>
 
-                    </ul>
+
+
+                                <li ><NavLink to={'wish-list'} className={({ isActive }) =>
+                                    `flex items-center gap-2 px-3 py-2 rounded-lg  font-medium 
+              ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
+                                }><FaBookmark className="text-black" size={24} />WishList</NavLink></li>
+
+                                <li ><NavLink to={'pay-history'} className={({ isActive }) =>
+                                    `flex items-center gap-2 px-3 py-2 rounded-lg  font-medium 
+              ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
+                                }><FaCcAmazonPay size={24} />Payment History</NavLink></li>
+
+                                <li ><NavLink to={'discount'} className={({ isActive }) =>
+                                    `flex items-center gap-2 px-3 py-2 rounded-lg  font-medium 
+              ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
+                                }><MdDiscount size={24} />Get A Discount</NavLink></li>
+
+                            </ul>}
                     <div className="divider mt-20"></div>
                     <ul className="p-10 space-y-8 mt-20">
-                        <li ><NavLink className="flex items-center gap-2"><BsFillHouseFill size={22} />Home</NavLink></li>
+                        <li ><NavLink to={'/'} className="flex items-center gap-2"><BsFillHouseFill size={22} />Home</NavLink></li>
 
-                        <li ><NavLink className="flex items-center gap-2"><MdLogout size={22} />Logout</NavLink></li>
+                        <li onClick={logout} ><NavLink className="flex items-center gap-2"><MdLogout size={22} />Logout</NavLink></li>
                     </ul>
                 </div>
 
 
 
 
-                <div className="p-8">
+                <div className="p-8 flex-1  overflow-y-auto  ">
                     <Outlet></Outlet>
                 </div>
             </div>

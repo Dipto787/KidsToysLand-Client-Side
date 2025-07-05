@@ -9,13 +9,17 @@ import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../Authentication/AuthProvider";
 import useCart from "../../hooks/useCart";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import Spinner from "../../Shared/Spinner";
+import IsAdmin from "../../hooks/isAdmin";
 const ToysDetails = () => {
     let [, refetch] = useCart();
+    let [isAdmin,isProgress] = IsAdmin();
     let params = useParams();
     let axiosSecure = UseAxiosSecure();
     let { user } = useContext(AuthContext);
     let [quantity, setQuantity] = useState(1);
-    let { data: toys = [], isLoading } = useQuery({
+    let { data: toys = [], isLoading: pend } = useQuery({
         queryKey: ['toys'],
         queryFn: async () => {
             let { data } = await axiosSecure.get(`/all-toys/${params?.id}`);
@@ -23,14 +27,27 @@ const ToysDetails = () => {
         }
     })
 
-    console.log(toys)
+    console.log('pend', pend)
+
+    let { data: wishList = {}, isLoading, refetch: updates } = useQuery({
+        queryKey: ['wishList', user?.email, toys._id],
+        queryFn: async () => {
+            let { data } = await axiosSecure.get('/wishList', { params: { email: user?.email, id: toys._id } });
+            return data;
+        },
+
+
+    })
+
+    let isSave = wishList?.saved === true;
+
 
     let handleAddCart = async (cart) => {
         if (!user) {
             return toast.error('please sign in first');
         }
         let extra = { email: user?.email, quantity };
-        let { data } = await axiosSecure.post('/cart', { cart, extra });
+        let { data } = await axiosSecure.post('/cart', { cart, extra, status: 'pending' });
         console.log(data)
         if (data.insertedId) {
             toast.success('Toys Add To Cart')
@@ -42,10 +59,25 @@ const ToysDetails = () => {
             }
         }
     }
+
+    let handleAddToWishList = async (wishList) => {
+        let { data } = await axiosSecure.post('/wishList', { wishList, saved: true, email: user?.email, id: toys._id });
+        console.log(data)
+        if (data.insertedId) {
+            updates()
+            toast.success('saved');
+        }
+
+    }
+
+    if (isLoading || !user || isProgress) {
+        return <Spinner></Spinner>;
+    }
     return (
         <div className="shadow-xl my-4">
             <div className="">
                 <div className="hero-content h-screen gap-32    items-center  w-full flex-col lg:flex-row">
+
                     <img
                         src={toys.img}
                         className=""
@@ -56,8 +88,26 @@ const ToysDetails = () => {
                         <div className="flex flex-row-reverse     justify-between">
 
                             <div className="flex font-bold cursor-pointer text-xl text-blue-500  items-center gap-2">
-                                <span className="text-black">Save</span>
-                                <CiSaveUp2 size={22} className="text-blue-500 font-bold" />
+
+
+                                {
+                                    isSave ?
+                                        <div className="flex gap-2">
+                                            <span className="text-blue-500">Saved</span>
+                                            <FaBookmark size={22} className="text-blue-500 font-bold" />
+
+                                        </div>
+                                        :
+                                        <div className="flex gap-2">
+                                            <span className="text-black">Save</span>
+                                            <FaRegBookmark onClick={() => handleAddToWishList(toys)} size={22} className="text-blue-500 font-bold" />
+                                        </div>
+
+
+                                }
+
+
+
 
                             </div>
                             <div ><p className='text-lg mt-10 flex gap-4 '><span className='  flex'>
@@ -86,7 +136,7 @@ const ToysDetails = () => {
                             </button>
                         </div>
 
-                        <button onClick={() => handleAddCart(toys)} className="btn bg-[#f57224] text-white p-4 px-16 py-5 ">Add To Cart</button>
+                        <button disabled={isAdmin} onClick={() => handleAddCart(toys)} className="btn bg-[#f57224] text-white p-4 px-16 py-5 ">Add To Cart</button>
 
                     </div>
                 </div>

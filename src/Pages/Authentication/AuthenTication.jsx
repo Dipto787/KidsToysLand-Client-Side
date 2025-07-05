@@ -1,31 +1,35 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiSolidHide } from "react-icons/bi";
-import { FaEye } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { FaEye, FaGoogle } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthContext } from "./AuthProvider";
 import { TbFidgetSpinner } from "react-icons/tb";
 import Swal from "sweetalert2";
-import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-
+import { FcGoogle } from "react-icons/fc";
 const AuthenTication = () => {
     let [path, setPath] = useState('login');
     let [hide, setHide] = useState(true);
     let [confirmHide, setConfirmHide] = useState(true);
-    let { createAccount, loading, setLoading, updateUserProfile, signUp } = useContext(AuthContext);
+    let { createAccount, loading, continueWithGoogle, setLoading, updateUserProfile, signUp } = useContext(AuthContext);
+    let location = useLocation();
     let [pending, setPending] = useState(false);
-    let [confirmPass, setConfirmPass] = useState('');
-    let [pass, setPass] = useState('');
-    let navigate = useNavigate();
-
     const {
         register,
         handleSubmit,
         reset,
+        watch,
         formState: { errors },
     } = useForm();
+    const pass = watch('password');
+    const confirmPass = watch('confirmPassword');
+    const passwordsMatch = pass === confirmPass;
+    let navigator = location?.state ? location.state : '/';
+
+    let navigate = useNavigate();
+
     const onRegisterSubmit = async (e) => {
 
         try {
@@ -44,20 +48,24 @@ const AuthenTication = () => {
                     icon: "success",
                     draggable: true
                 });
-                navigate('/');
+                navigate(navigator);
                 setPending(false);
                 setLoading(false);
             }
 
             reset();
         } catch (err) {
-            toast.error(err.message)
+            toast.error(err.message);
             setLoading(false);
             setPending(false);
         }
     }
 
+    console.log('match', passwordsMatch)
     const handleLoginSubmit = async (e) => {
+        if (!passwordsMatch) {
+            return;
+        }
         try {
             console.log(e)
             const result = await signUp(e.loginEmail, e.LoginPassword);
@@ -67,7 +75,7 @@ const AuthenTication = () => {
                     icon: "success",
                     draggable: true
                 });
-                navigate('/');
+                navigate(navigator);
                 setLoading(false);
             }
         } catch (err) {
@@ -76,6 +84,11 @@ const AuthenTication = () => {
         }
     }
 
+    let handleContinueWithGoogle = async () => {
+        let res = await continueWithGoogle()
+        toast.success('success to login');
+        navigate(navigator)
+    }
 
     return (
         <div className="max-w-4xl my-20 m-auto">
@@ -98,7 +111,7 @@ const AuthenTication = () => {
                                         <label className="label mt-3  text-stone-500 font-semibold text-xl">  Password</label>
 
                                         <label className={`input border-red-500 validator w-full ${pass === confirmPass && 'border-green-400'} `}>
-                                            <input  
+                                            <input
                                                 {...register('LoginPassword', { required: true })} type={`${hide ? 'password' : 'text'}`} className="w-full" name="LoginPassword" placeholder="Password" />
                                             <p onClick={() => setHide(!hide)} className={'text-xl cursor-pointer'}>{hide ? <FaEye /> :
                                                 <BiSolidHide />}</p>
@@ -110,6 +123,10 @@ const AuthenTication = () => {
                                     </fieldset>
                                     <p className="text-xl text-center my-5">Don't Have an Account? Please <Link className="underline text-purple-500 font-semibold " onClick={() => setPath('register')}>Sign Up</Link></p>
                                 </form>
+                                <div className="divider"></div>
+                                <div>
+                                    <button disabled={loading} onClick={handleContinueWithGoogle} className="btn p-6 w-full text-lg"> Continue With <FcGoogle size={21} /></button>
+                                </div>
                             </div>
                         </div>
                         :
@@ -135,8 +152,8 @@ const AuthenTication = () => {
 
                                         <label className="label mt-3  text-stone-500 font-semibold text-xl">  Password</label>
 
-                                        <label className={`input border-red-500 validator w-full ${pass === confirmPass && 'border-green-400'} `}>
-                                            <input onKeyUp={(e) => setPass(e.target.value)}
+                                        <label className={`input validator w-full `}>
+                                            <input
                                                 {...register('password', { required: true })} type={`${hide ? 'password' : 'text'}`} className="    w-full" name="password" placeholder="Password" />
                                             <p onClick={() => setHide(!hide)} className={'text-xl cursor-pointer'}>{hide ? <FaEye /> :
                                                 <BiSolidHide />}</p>
@@ -147,9 +164,9 @@ const AuthenTication = () => {
 
                                         <label className="label mt-3  text-stone-500 font-semibold text-xl"> Confirm Password</label>
 
-                                        <label className={`input border-red-500 validator w-full ${pass === confirmPass && 'border-green-400'} `}>
+                                        <label className={`input validator w-full `}>
 
-                                            <input onKeyUp={(e) => setConfirmPass(e.target.value)} {...register('confirmPassword', { required: true })} type={`${confirmHide ? 'password' : 'text'}`} className=" w-full" placeholder=" Confirm Password" name="confirmPassword" />
+                                            <input   {...register('confirmPassword', { required: true })} type={`${confirmHide ? 'password' : 'text'}`} className=" w-full" placeholder=" Confirm Password" name="confirmPassword" />
                                             <p onClick={() => setConfirmHide(!confirmHide)} className={` text-xl $ text-black  cursor-pointer  `}>{confirmHide ? <FaEye /> :
                                                 <BiSolidHide />}</p>
                                         </label>
@@ -157,9 +174,10 @@ const AuthenTication = () => {
 
                                         {errors.confirmPassword && <span className="text-red-500 text-lg font-bold p-2">Retype password is required</span>}
 
-                                        {
-                                            confirmPass !== pass && <span className="text-red-500 text-lg font-bold p-2">Password Dost'n match </span>
-                                        }
+                                        <p className="text-xl text-red-500">
+                                            {pass && passwordsMatch ? <p className="text-green-500">✅ Passwords match </p> : "❌ Passwords do not match"}
+                                        </p>
+
 
 
                                         <div className="flex items-center">
@@ -173,6 +191,11 @@ const AuthenTication = () => {
                                     </fieldset>
                                     <p className="text-xl text-center my-5">Already Have an Account? Please <Link className="underline text-purple-500 font-semibold " onClick={() => setPath('login')}>Sign In</Link></p>
                                 </form>
+
+                                <div className="divider"></div>
+                                <div>
+                                    <button disabled={loading} onClick={handleContinueWithGoogle} className="btn p-6 w-full text-lg"> Continue With <FcGoogle size={21} /></button>
+                                </div>
                             </div>
                         </div>
                     }
