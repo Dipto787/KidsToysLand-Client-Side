@@ -11,7 +11,7 @@ import { AuthContext } from "../Authentication/AuthProvider";
 import useCart from "../../hooks/useCart";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import Spinner from "../../Shared/Spinner";
-import IsAdmin from "../../hooks/isAdmin";
+import IsAdmin from "../../hooks/UseAdmin";
 const ToysDetails = () => {
     let [, refetch] = useCart();
     let [isAdmin,isProgress] = IsAdmin();

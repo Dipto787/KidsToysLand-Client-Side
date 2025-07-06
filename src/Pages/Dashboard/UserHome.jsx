@@ -4,6 +4,7 @@ import useCart from "../../hooks/useCart";
 import { AuthContext } from "../Authentication/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
+import CountUp from "react-countup";
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
 const UserHome = () => {
@@ -56,20 +57,20 @@ const UserHome = () => {
             <div className="flex justify-between  border-b-2 p-4 items-center">
                 {/* Total Orders */}
                 <div className="bg-[#F3E5F5] px-28 py-3  text-center border-2 text-[#4A148C] ">
-                    <h1 className="text-2xl">Your Orders</h1>
-                    <p className="text-5xl text-black">{cart.length + payHistory.length}+</p>
+                    <h1 className="text-2xl">Your Orders</h1> 
+                    <p className="text-5xl"> <CountUp end={cart.length + payHistory.length} duration={3} />+</p>
                 </div>
                 {/* Total Orders */}
 
                 <div className="bg-[#FFD700]  px-28 py-3 text-center border-2 text-[#4A148C] ">
-                    <h1 className="text-2xl">WishList</h1>
-                    <p className="text-5xl text-green-600">{wishList.length}+</p>
+                    <h1 className="text-2xl">WishList</h1> 
+                    <p className="text-5xl"> <CountUp end={wishList.length} duration={3} />+</p>
                 </div>
                 {/* Total Orders */}
 
                 <div className="bg-[#581845] px-20 py-3  text-center border-2 text-[#FAF3E0] ">
                     <h1 className="text-2xl">Total Spent</h1>
-                    <p className="text-5xl text-[#FAF3E0]">{totalSpent.toLocaleString()}+</p>
+                    <p className="text-5xl"> <CountUp end={totalSpent.toLocaleString()} duration={2} />+</p>
                 </div>
             </div>
 

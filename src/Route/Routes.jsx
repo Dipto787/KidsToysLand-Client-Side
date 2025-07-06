@@ -15,6 +15,11 @@ import NotFound from "../Shared/NotFound";
 import WishList from "../Pages/Dashboard/WishList";
 import PrivateRoute from "./PrivateRoute";
 import GetDiscount from "../Pages/Dashboard/GetDiscount";
+import VerifyAdmin from "./VerifyAdmin";
+import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
+import AddToys from "../Pages/Dashboard/Admin/AddToys";
+import ManageToys from "../Pages/Dashboard/Admin/ManageToys";
+import UpdateToys from "../Pages/Dashboard/Admin/UpdateToys";
 const Routes = createBrowserRouter([
     {
         path: '/',
@@ -52,7 +57,6 @@ const Routes = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoute> <DashboardLayout></DashboardLayout></PrivateRoute>,
-        errorElement: <NotFound></NotFound>,
         children: [
             {
                 path: 'home',
@@ -77,6 +81,22 @@ const Routes = createBrowserRouter([
             {
                 path: 'discount',
                 element: <PrivateRoute><GetDiscount></GetDiscount></PrivateRoute>
+            },
+            {
+                path: 'adminHome',
+                element: <VerifyAdmin><AdminHome></AdminHome></VerifyAdmin>
+            },
+            {
+                path: 'add-toys',
+                element: <VerifyAdmin><AddToys></AddToys></VerifyAdmin>
+            },
+            {
+                path: 'manage-toys',
+                element:<VerifyAdmin><ManageToys></ManageToys></VerifyAdmin>
+            },
+            {
+                path:'update-toy/:id',
+                element:<VerifyAdmin><UpdateToys></UpdateToys></VerifyAdmin>
             }
         ],
 
