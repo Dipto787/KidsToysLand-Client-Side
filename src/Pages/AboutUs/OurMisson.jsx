@@ -5,7 +5,7 @@ const OurMission = () => {
         <div>
             <section className="bg-pink-100 py-16 px-4">
                 <div className="max-w-4xl mx-auto text-center font-sans">
-                    <h2 className="text-4xl font-bold text-pink-500 mb-6">🎯 Our Mission</h2>
+                    <h2 className="lg:text-4xl text-xl font-bold text-pink-500 mb-6">🎯 Our Mission</h2>
                     <p className="text-lg text-gray-700 space-x-3 mb-8">
                         At KidsToysLand, we believe that childhood is a magical time filled with wonder, creativity, and endless possibilities.
                         Our mission is to nurture that spirit by providing high-quality, fun, and educational toys that inspire learning through play.

@@ -37,7 +37,7 @@ const Navbar = () => {
                 (
                     isAdmin ?
                         <NavLink to={'/dashboard/notifications x'} className="relative"><IoIosNotifications size={28} />
-                            <p className="absolute text-lg  -right-4  text-white font-bold  -top-3"><span className="bg-red-500 rounded-full px-2 py-1 ">{cart.length}</span></p>
+                            <p className="absolute text-lg  -right-4  text-white font-bold  -top-3"><span className="bg-red-500 rounded-full px-2 py-1 text-xs  ">{cart.length}</span></p>
                         </NavLink>
                         :
                         <NavLink to={'/dashboard/my-order'} className="relative"><IoCart size={28} />
@@ -75,10 +75,10 @@ const Navbar = () => {
                             {Links}
                         </ul>
                     </div>
-                    <Link className="btn max-w-48   text-xl"><img src={logo} alt="" /></Link>
+                    <Link className=" max-w-32 lg:max-w-36 btn btn-sm"><img src={logo} alt="" /></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal text-xs px-1">
                         {Links}
                     </ul>
                 </div>
@@ -91,16 +91,16 @@ const Navbar = () => {
                         user ?
                             <div className="dropdown dropdown-end">
                                 <div className="flex gap-5 items-center">
-                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                        <div className="w-10 rounded-full">
+                                    <div tabIndex={0} role="button" className=" avatar">
+                                        <div className=" w-8  rounded-full">
                                             <img
-                                                alt="user img"
+                                                alt=""
                                                 src={user?.photoURL} />
                                         </div>
                                     </div>
                                     {
                                         !isLoading && !isAdmin && <NavLink to={'/dashboard/notifications x'} className="relative"><IoIosNotifications size={33} />
-                                            <p className="absolute text-lg  -right-4  text-white font-bold  -top-3"><span className="bg-red-500 rounded-full px-2 py-1 ">{notifications.length}</span></p>
+                                            <p className="absolute text-sm  -right-4  text-white font-bold  -top-3"><span className="bg-red-500 rounded-full px-2 py-1 ">{notifications.length}</span></p>
                                         </NavLink>
                                     }
                                 </div>
@@ -115,7 +115,7 @@ const Navbar = () => {
                             :
 
                             !loading &&
-                            <Link to={'/verify-checkout'} className="btn bg-purple-500 px-10 text-white font-semibold">Sign In</Link>
+                            <Link to={'/verify-checkout'} className="btn bg-purple-500 px-8 text-xs text-white font-semibold">Sign In</Link>
 
                     }
                 </div>

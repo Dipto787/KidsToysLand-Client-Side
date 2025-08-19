@@ -63,23 +63,23 @@ const AdminHome = () => {
     return (
 
         <div>
-            <div className="flex justify-between gap-3  border-b-2 p-4 items-center">
+            <div className="flex justify-between gap-3   border-b-2 pb-3 items-center">
                 {/* Total Revenue */}
-                <div className="bg-gradient-to-r  from-purple-500 to-pink-300 w-full py-9  text-center flex items-center justify-center rounded-xl  gap-2 text-white ">
-                    <p><GiMoneyStack size={70} /></p>
+                <div className="bg-gradient-to-r  from-purple-500 to-pink-300 w-full py-5  text-center flex items-center justify-center rounded-lg  gap-2 text-white ">
+                    <p><GiMoneyStack size={50} /></p>
                     <div>
-                        <h1 className="text-2xl font-bold">Total Revenue</h1>
-                        <p className="text-5xl"> <CountUp end={totalRevenues} duration={2} />+</p>
+                        <h1 className="text-sm font-bold">Total Revenue</h1>
+                        <p className="text-xl"> <CountUp end={totalRevenues} duration={2} />+</p>
                     </div>
                 </div>
 
 
                 {/* Total Customers */}
-                <div className="bg-gradient-to-r from-[#d5a65c] to-[#fbe4ba] w-full py-9  text-center flex items-center justify-center rounded-xl gap-2 text-white ">
-                    <p><FaUsers size={70} /></p>
+                <div className="bg-gradient-to-r from-[#d5a65c] to-[#fbe4ba] w-full py-5  text-center flex items-center justify-center rounded-lg gap-2 text-white ">
+                    <p><FaUsers size={50} /></p>
                     <div>
-                        <h1 className="text-2xl font-bold">Total Users</h1>
-                        <p className="text-5xl"> <CountUp end={users.length} duration={4} />+</p>
+                        <h1 className="text-sm font-bold">Total Users</h1>
+                        <p className="text-xl"> <CountUp end={users.length} duration={4} />+</p>
 
                     </div>
                 </div>
@@ -87,20 +87,20 @@ const AdminHome = () => {
 
 
                 {/* Total Customers */}
-                <div className="bg-gradient-to-r from-[#fe5489] to-[#fec6e3] w-full py-9  text-center flex items-center justify-center rounded-xl  gap-2 text-white ">
-                    <p><MdToys size={70} /></p>
+                <div className="bg-gradient-to-r from-[#fe5489] to-[#fec6e3] w-full py-5  text-center flex items-center justify-center rounded-lg  gap-2 text-white ">
+                    <p><MdToys size={50} /></p>
                     <div>
-                        <h1 className="text-2xl font-bold">Total Toys</h1>
-                        <p className="text-5xl"> <CountUp end={toys.length} duration={2} />+</p>
+                        <h1 className="text-sm font-bold">Total Toys</h1>
+                        <p className="text-xl"> <CountUp end={toys.length} duration={2} />+</p>
                     </div>
                 </div>
 
                 {/* Total Customers */}
-                <div className="bg-gradient-to-r from-[#70b4ff] to-[#a8e9ff] w-full py-9  text-center flex items-center justify-center rounded-xl   text-white ">
-                    <p><TbTruckDelivery size={70} /></p>
+                <div className="bg-gradient-to-r from-[#70b4ff] to-[#a8e9ff] w-full py-5  text-center flex items-center justify-center rounded-lg   text-white ">
+                    <p><TbTruckDelivery size={50} /></p>
                     <div>
-                        <h1 className="text-2xl font-bold">Total Orders</h1>
-                          <p className="text-5xl"> <CountUp end={totalRevenue.length} duration={5} />+</p>
+                        <h1 className="text-sm font-bold">Total Orders</h1>
+                          <p className="text-xl"> <CountUp end={totalRevenue.length} duration={5} />+</p>
                     </div>
                 </div>
 
@@ -108,7 +108,7 @@ const AdminHome = () => {
 
             <div className="mt-10 ">
                 <BarChart
-                    width={500}
+                    width={850}
                     height={300}
                     data={chartData}
                     margin={{

@@ -3,7 +3,6 @@ import UseAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-
 const UpdateToys = () => {
     let { id } = useParams();
     let [loading, setLoading] = useState(false);

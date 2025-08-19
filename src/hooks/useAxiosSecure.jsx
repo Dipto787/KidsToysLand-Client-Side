@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let axiosSecure = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://kids-toys-land-server-side.vercel.app',
     withCredentials: true
 })
 const UseAxiosSecure = () => {

@@ -9,9 +9,11 @@ import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 
-import b1 from '../../assets/Banner/b-1.png'
-import b2 from '../../assets/Banner/b-2.png'
-import b3 from '../../assets/Banner/b-3.png'
+import b1 from '../../assets/Banner/b-1.jpg'
+import b2 from '../../assets/Banner/b-2.jpg'
+import b3 from '../../assets/Banner/b-3.jpg'
+import b4 from '../../assets/Banner/b-4.jpg'
+import b5 from '../../assets/Banner/b-5.jpg'
 
 
 const Banner = ({ text }) => {
@@ -26,9 +28,11 @@ const Banner = ({ text }) => {
             modules={[Pagination, Navigation, Autoplay]}
             className="mySwiper"
         >
-            <SwiperSlide><img className='w-full' src={b1} alt="" /></SwiperSlide>
-            <SwiperSlide><img className='w-full' src={b2} alt="" /></SwiperSlide>
-            <SwiperSlide><img className='w-full' src={b3} alt="" /></SwiperSlide>
+            <SwiperSlide><img className='mx-auto' src={b1} alt="" /></SwiperSlide>
+            <SwiperSlide><img className='mx-auto' src={b2} alt="" /></SwiperSlide>
+            <SwiperSlide><img className='mx-auto' src={b3} alt="" /></SwiperSlide>
+            <SwiperSlide><img className='mx-auto' src={b4} alt="" /></SwiperSlide>
+            <SwiperSlide><img className='mx-auto' src={b5} alt="" /></SwiperSlide>
 
 
         </Swiper>

@@ -14,7 +14,7 @@ import Spinner from "../../Shared/Spinner";
 import IsAdmin from "../../hooks/UseAdmin";
 const ToysDetails = () => {
     let [, refetch] = useCart();
-    let [isAdmin,isProgress] = IsAdmin();
+    let [isAdmin, isProgress] = IsAdmin();
     let params = useParams();
     let axiosSecure = UseAxiosSecure();
     let { user } = useContext(AuthContext);
@@ -87,7 +87,7 @@ const ToysDetails = () => {
                         <p>{toys.details}</p>
                         <div className="flex flex-row-reverse     justify-between">
 
-                            <div className="flex font-bold cursor-pointer text-xl text-blue-500  items-center gap-2">
+                            <div d className="flex font-bold cursor-pointer text-xl text-blue-500  items-center gap-2">
 
 
                                 {
@@ -98,10 +98,12 @@ const ToysDetails = () => {
 
                                         </div>
                                         :
-                                        <div className="flex gap-2">
-                                            <span className="text-black">Save</span>
-                                            <FaRegBookmark onClick={() => handleAddToWishList(toys)} size={22} className="text-blue-500 font-bold" />
-                                        </div>
+                                        <button disabled={isAdmin}>
+                                            <div className="flex gap-2">
+                                                <span className="text-black">Save</span>
+                                                <FaRegBookmark onClick={() => handleAddToWishList(toys)} size={22} className="text-blue-500 font-bold" />
+                                            </div>
+                                        </button>
 
 
                                 }

@@ -24,7 +24,6 @@ const Routes = createBrowserRouter([
     {
         path: '/',
         element: <Root></Root>,
-        errorElement: <NotFound></NotFound>,
         children: [
             {
                 index: true,
@@ -57,6 +56,7 @@ const Routes = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoute> <DashboardLayout></DashboardLayout></PrivateRoute>,
+          errorElement: <NotFound></NotFound>,
         children: [
             {
                 path: 'home',

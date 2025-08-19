@@ -107,9 +107,9 @@ const AllToys = () => {
 
                 </div>
 
-                <div className="flex lg:hidden justify-between px-10 mb-5">
+                <div className="flex  lg:hidden justify-between lg:px-10 mb-5">
                     <div>
-                        <select onChange={(e) => setBrand(e.target.value)} className="border-2 border-orange-400 p-2" defaultValue={'Select Brand'} name="brand" id="">
+                        <select onChange={(e) => setBrand(e.target.value)} className="border-2 lg:text-sm text-xs border-orange-400 p-2" defaultValue={'Select Brand'} name="brand" id="">
                             <option disabled>Select Brand</option>
                             <option value="funskool">funskool</option>
                             <option value="toybilss">toybilss</option>
@@ -126,7 +126,7 @@ const AllToys = () => {
 
                     {/*  */}
                     <div className=" ">
-                        <select onChange={(e) => setAge(e.target.value)} className="border-2 border-pink-400 p-2" defaultValue={'Select Age'} name="age" id="">
+                        <select onChange={(e) => setAge(e.target.value)} className="border-2 border-pink-400 p-2  lg:text-sm text-xs" defaultValue={'Select Age'} name="age" id="">
                             <option disabled>Select Age</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

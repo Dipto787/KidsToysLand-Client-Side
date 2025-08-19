@@ -6,10 +6,10 @@ const SubBanner = () => {
             <div className='flex justify-between items-center py-10 rounded-xl bg-[#bce6fc] lg:p-20 '>
                 <div><img src={baby1} alt="" /></div>
                 <div className='text-center space-y-10'>
-                    <h1 className='lg:text-3xl text-2xl font-bold'>All
+                    <h1 className='lg:text-3xl text-xl font-bold'>All
                         🔥 Damaged Box Deals – 50% OFF!
                     </h1>
-                    <p>Get brand new toys with 50% OFF—only the packaging is slightly damaged!
+                    <p className=''>Get brand new toys with 50% OFF—only the packaging is slightly damaged!
                     </p>
                     <button className="btn px-12 bg-[#ff0000]  text-white rounded-full font-semibold">Shop Now</button>
                 </div>

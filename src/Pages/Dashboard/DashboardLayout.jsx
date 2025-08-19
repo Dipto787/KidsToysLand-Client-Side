@@ -3,7 +3,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import { FaAmazonPay, FaBookmark, FaCcAmazonPay, FaMotorcycle } from "react-icons/fa";
 import { FcPaid } from "react-icons/fc";
 import { IoMdHome } from "react-icons/io";
-import { IoCart } from "react-icons/io5";
+import { IoCart, IoMenu } from "react-icons/io5";
 import { MdDiscount, MdDownloadForOffline, MdFormatListBulleted, MdLogout } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../../hooks/useCart";
@@ -19,16 +19,20 @@ const DashboardLayout = () => {
     let { logout, user } = useContext(AuthContext);
 
     return (
-        <div>
-            <div className="flex h-screen gap-10">
-                <div className={`bg-[#edf2f4] h-full w-[21%]`}>
+        <div className="max-w-screen-2xl mx-auto">
+            <div className="flex min-h-screen gap-10">
+                <div className={`cursor-pointer`}>
+                    <IoMenu size={30} />
+                </div>
+
+                <div className={`bg-[#edf2f4] hidden  w-[21%]`}>
 
                     {
 
                         !isLoading && user &&
                         (
                             isAdmin ?
-                                <ul className="space-y-5 p-5 text-lg">
+                                <ul className="space-y-5 p-5 text-xs">
                                     <li ><NavLink to={'/dashboard/adminHome'} className={({ isActive }) =>
                                         `flex items-center gap-2 px-3 py-2 rounded-lg  font-medium 
               ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
@@ -38,17 +42,17 @@ const DashboardLayout = () => {
                                     <li ><NavLink to={'/dashboard/add-toys'} className={({ isActive }) =>
                                         `flex items-center gap-2 px-3 py-2 rounded-lg  font-medium 
               ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
-                                    }><FaMotorcycle  size={24} />Add Toys</NavLink></li>
+                                    }><FaMotorcycle size={24} />Add Toys</NavLink></li>
 
                                     <li ><NavLink to={'/dashboard/manage-toys'} className={({ isActive }) =>
                                         `flex items-center gap-2 px-3 py-2 rounded-lg  font-medium 
               ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
-                                    }><MdFormatListBulleted   size={24} />Manage Toys</NavLink></li>
+                                    }><MdFormatListBulleted size={24} />Manage Toys</NavLink></li>
 
 
                                 </ul>
                                 :
-                                <ul className="space-y-5 p-5 text-lg">
+                                <ul className="space-y-5 p-5 text-xs">
                                     <li ><NavLink to={'/dashboard/home'} className={({ isActive }) =>
                                         `flex items-center gap-2 px-3 py-2 rounded-lg  font-medium 
               ${isActive ? "bg-pink-500 text-white shadow-md" : "text-gray-700 hover:bg-pink-100"}`
@@ -77,8 +81,8 @@ const DashboardLayout = () => {
                                     }><MdDiscount size={24} />Get A Discount</NavLink></li>
 
                                 </ul>)}
-                    <div className="divider mt-20"></div>
-                    <ul className="p-10 space-y-8 mt-20">
+                    <div className="divider mt-15"></div>
+                    <ul className="p-10 space-y-8 mt-">
                         <li ><NavLink to={'/'} className="flex items-center gap-2"><BsFillHouseFill size={22} />Home</NavLink></li>
 
                         <li onClick={logout} ><NavLink className="flex items-center gap-2"><MdLogout size={22} />Logout</NavLink></li>
@@ -88,7 +92,7 @@ const DashboardLayout = () => {
 
 
 
-                <div className="p-8 flex-1  overflow-y-auto  ">
+                <div className="p-8 flex-1     ">
                     <Outlet></Outlet>
                 </div>
             </div>

@@ -13,7 +13,9 @@ const CheckoutForm = () => {
     let [clientSecret, setClientSecret] = useState('');
     const location = useLocation();
     let [, refetch] = useCart();
+    let [cart] = useCart();
     let navigate = useNavigate();
+    let [process, setProcess] = useState(false);
     let [transactionId, setTransactionId] = useState('');
     console.log(location)
     let axiosSecure = UseAxiosSecure();
@@ -25,6 +27,12 @@ const CheckoutForm = () => {
         // totalPrice += cart.cart.price * cart.cart.quantity
         totalPrice += carts.extra.quantity * carts.cart.price
     }
+
+    useEffect(() => {
+        if (!location.state || !Array.isArray(location.state) || location.state.length === 0) {
+            return navigate('/dashboard/myOrder', { replace: true });
+        }
+    }, [location.state, navigate]);
 
 
 
@@ -51,11 +59,14 @@ const CheckoutForm = () => {
     }, [axiosSecure, totalPrice]);
     let handleSubmit = async (e) => {
         e.preventDefault();
+        setProcess(true);
         if (!stripe || !elements) {
+            setProcess(false);
             return
         }
         const card = elements.getElement(CardElement);
         if (card === null) {
+            setProcess(false);
             return
         }
 
@@ -66,6 +77,7 @@ const CheckoutForm = () => {
 
         if (error) {
             console.log(error)
+            setProcess(false);
         } else {
 
             console.log(paymentMethod)
@@ -95,16 +107,21 @@ const CheckoutForm = () => {
                     cartId: location.state.map(carts => carts._id),
                     status: 'Paid'
                 }
-
+                let quantity = location.state.map(carts => carts.extra.quantity);
+                let cartIds = location.state.map(carts => carts.cart._id);
+                console.log(quantity)
                 axiosSecure.post(`/payHistory`, payment)
+                let setSold = await axiosSecure.patch(`/carts`, { cartIds, quantity });
+                console.log('setSolddata', setSold.data)
                 let { data } = await axiosSecure.get(`/usersLocation/${user?.email}`);
                 let { data: loll } = await axiosSecure.get(`/payHistory/${user?.email}`);
                 if (!data.userLocation) {
-
                     let { data: lol } = await axiosSecure.patch(`/payHistoryLocation`, data);
                 }
                 refetch();
-                navigate('/dashboard/pay-history')
+                setProcess(false);
+                window.location.replace('/dashboard/pay-history');
+
             }
         }
     }
@@ -197,7 +214,7 @@ const CheckoutForm = () => {
                             </div>
 
 
-                            <button type="submit" className="mt-6 w-full  bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 font-medium" disabled={!stripe || !clientSecret}>
+                            <button type="submit" className="mt-6 w-full  bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 font-medium" disabled={!stripe || !clientSecret || process || cart.length === 0}>
                                 Pay
                             </button>
                         </div>

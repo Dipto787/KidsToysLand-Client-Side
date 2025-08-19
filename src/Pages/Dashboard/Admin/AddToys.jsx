@@ -67,11 +67,11 @@ const AddToys = () => {
     return (
         <div>
             <div>
-                <h1 className="text-5xl font-semibold uppercase   text-center my-4">Add an Toy</h1>
+                <h1 className="text-xl font-semibold uppercase   text-center ">Add an Toy</h1>
                 <div className="divider w-[50%] mx-auto"></div>
             </div>
             <form onSubmit={handleSubmit(handleAddToy)} className="bg-[#f3f3f3]  p-10">
-                <div className="grid gap-4  grid-cols-2">
+                <div className="grid gap-4 text-xs  grid-cols-2">
 
                     <div>
                         <fieldset className="fieldset">
@@ -145,7 +145,7 @@ const AddToys = () => {
                     </div>
                 </div>
                 <div className="text-center">
-                    <button disabled={loading} className="btn  w-[50%] mt-8 bg-gradient-to-r from-[#876025] to-[#b17e2f] text-white font-bold py-6 ">{loading ? <FaSpinner size={22} className="animate-spin" /> : 'Add Toy'}</button>
+                    <button disabled={loading} className="btn  w-[50%] mt-8 bg-gradient-to-r from-[#876025] to-[#b17e2f] text-white text-xs font-bold py-6 ">{loading ? <FaSpinner size={22} className="animate-spin" /> : 'Add Toy'}</button>
                 </div>
             </form>
         </div>
