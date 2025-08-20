@@ -7,7 +7,7 @@ import { FaUsers } from "react-icons/fa";
 import { MdToys } from "react-icons/md";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { TbTruckDelivery } from "react-icons/tb";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell, ResponsiveContainer } from "recharts";
 import CountUp from "react-countup";
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
@@ -63,9 +63,9 @@ const AdminHome = () => {
     return (
 
         <div>
-            <div className="flex justify-between gap-3   border-b-2 pb-3 items-center">
+            <div className="flex flex-col lg:flex-row justify-between gap-3   border-b-2 pb-3 items-">
                 {/* Total Revenue */}
-                <div className="bg-gradient-to-r  from-purple-500 to-pink-300 w-full py-5  text-center flex items-center justify-center rounded-lg  gap-2 text-white ">
+                <div className="bg-gradient-to-r  from-purple-500 to-pink-300 lg:w-full py-5  text-center flex items-center justify-center rounded-lg  gap-2 text-white ">
                     <p><GiMoneyStack size={50} /></p>
                     <div>
                         <h1 className="text-sm font-bold">Total Revenue</h1>
@@ -75,7 +75,7 @@ const AdminHome = () => {
 
 
                 {/* Total Customers */}
-                <div className="bg-gradient-to-r from-[#d5a65c] to-[#fbe4ba] w-full py-5  text-center flex items-center justify-center rounded-lg gap-2 text-white ">
+                <div className="bg-gradient-to-r from-[#d5a65c] to-[#fbe4ba] lg:w-full py-5  text-center flex items-center justify-center rounded-lg gap-2 text-white ">
                     <p><FaUsers size={50} /></p>
                     <div>
                         <h1 className="text-sm font-bold">Total Users</h1>
@@ -87,7 +87,7 @@ const AdminHome = () => {
 
 
                 {/* Total Customers */}
-                <div className="bg-gradient-to-r from-[#fe5489] to-[#fec6e3] w-full py-5  text-center flex items-center justify-center rounded-lg  gap-2 text-white ">
+                <div className="bg-gradient-to-r from-[#fe5489] to-[#fec6e3] lg:w-full py-5  text-center flex items-center justify-center rounded-lg  gap-2 text-white ">
                     <p><MdToys size={50} /></p>
                     <div>
                         <h1 className="text-sm font-bold">Total Toys</h1>
@@ -96,37 +96,41 @@ const AdminHome = () => {
                 </div>
 
                 {/* Total Customers */}
-                <div className="bg-gradient-to-r from-[#70b4ff] to-[#a8e9ff] w-full py-5  text-center flex items-center justify-center rounded-lg   text-white ">
+                <div className="bg-gradient-to-r from-[#70b4ff] to-[#a8e9ff] lg:w-full py-5  text-center flex items-center justify-center rounded-lg   text-white ">
                     <p><TbTruckDelivery size={50} /></p>
                     <div>
                         <h1 className="text-sm font-bold">Total Orders</h1>
-                          <p className="text-xl"> <CountUp end={totalRevenue.length} duration={5} />+</p>
+                        <p className="text-xl"> <CountUp end={totalRevenue.length} duration={5} />+</p>
                     </div>
                 </div>
 
             </div>
-
-            <div className="mt-10 ">
-                <BarChart
-                    width={850}
-                    height={300}
-                    data={chartData}
-                    margin={{
-                        top: 20,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Bar dataKey="uv" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
-                        {chartData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={colors[index % 20]} />
-                        ))}
-                    </Bar>
-                </BarChart>
+            <div className="mt-10 w-full h-[350px]">
+                <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                        data={chartData}
+                        margin={{
+                            top: 20,
+                            right: 30,
+                            left: 20,
+                            bottom: 5,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Bar
+                            dataKey="uv"
+                            fill="#8884d8"
+                            shape={<TriangleBar />}
+                            label={{ position: "top" }}
+                        >
+                            {chartData.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+                            ))}
+                        </Bar>
+                    </BarChart>
+                </ResponsiveContainer>
             </div>
         </div>
     );

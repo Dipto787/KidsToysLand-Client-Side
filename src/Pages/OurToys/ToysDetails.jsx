@@ -41,6 +41,8 @@ const ToysDetails = () => {
 
     let isSave = wishList?.saved === true;
 
+    
+
 
     let handleAddCart = async (cart) => {
         if (!user) {
@@ -76,32 +78,32 @@ const ToysDetails = () => {
     return (
         <div className="shadow-xl my-4">
             <div className="">
-                <div className="hero-content h-screen gap-32    items-center  w-full flex-col lg:flex-row">
+                <div className="hero-content h-screen lg:gap-32    items-center  w-full flex-col lg:flex-row">
 
                     <img
                         src={toys.img}
                         className=""
                     />
-                    <div className="space-y-6 ">
-                        <h1 className="text-5xl font-bold">{toys.name}</h1>
-                        <p>{toys.details}</p>
+                    <div className="space-y-3 ">
+                        <h1 className="text-xl font-bold">{toys.name}</h1>
+                        <p className="text-xs">{toys.details}</p>
                         <div className="flex flex-row-reverse     justify-between">
 
-                            <div d className="flex font-bold cursor-pointer text-xl text-blue-500  items-center gap-2">
+                            <div  className="flex font-bold cursor-pointer text-xs text-blue-500  items-center gap-2">
 
 
                                 {
                                     isSave ?
                                         <div className="flex gap-2">
                                             <span className="text-blue-500">Saved</span>
-                                            <FaBookmark size={22} className="text-blue-500 font-bold" />
+                                            <FaBookmark size={22} className="text-blue-500 text-xs font-bold" />
 
                                         </div>
                                         :
                                         <button disabled={isAdmin}>
                                             <div className="flex gap-2">
-                                                <span className="text-black">Save</span>
-                                                <FaRegBookmark onClick={() => handleAddToWishList(toys)} size={22} className="text-blue-500 font-bold" />
+                                                <span className="text-black text-xs">Save</span>
+                                                <FaRegBookmark onClick={() => handleAddToWishList(toys)} size={22} className="text-blue-500 font-bold text-xs" />
                                             </div>
                                         </button>
 
@@ -112,7 +114,7 @@ const ToysDetails = () => {
 
 
                             </div>
-                            <div ><p className='text-lg mt-10 flex gap-4 '><span className='  flex'>
+                            <div ><p className='text-xs mt-4 lg:mt-10 flex gap-4 '><span className='  flex'>
                                 <StarRatings
                                     rating={toys?.rating}
                                     starRatedColor="#faca51"
@@ -120,21 +122,22 @@ const ToysDetails = () => {
                                     starSpacing='2px'
                                     numberOfStars={6}
                                     name='rating'
-                                /></span> <span className="text-blue-400">Ratings ({toys?.rating})</span></p>
+                                /></span> <span className="text-blue-400 text-xs">Ratings ({toys?.rating})</span></p>
 
-                                <div className="mt-5">
-                                    brand: <span className="text-blue-400">{toys.brand}</span>
+                                <div className="mt-5 text-xs">
+                                    brand: <span className="text-blue-400 text-xs">{toys.brand}</span>
                                 </div>
                             </div>
                         </div>
                         <div className="divider"></div>
-                        <p className="text-[#f7a173] font-semibold text-4xl"> ${toys?.price}</p>
+                        <p className="text-[#f7a173] font-semibold text-sm"> ${toys?.price}</p>
                         <div className="flex gap-5   items-center">
                             Quantity
-                            <button disabled={quantity === 1} onClick={() => (1 < quantity && setQuantity(quantity - 1))} className={`btn-sm ${quantity === 1 && 'cursor-not-allowed'} bg-slate-200 p-3 text-lg `}><RiSubtractFill />
+                            <button disabled={quantity === 1} onClick={() => (1 < quantity && setQuantity(quantity - 1))} className={`btn-sm ${quantity === 1 && 'cursor-not-allowed'} bg-slate-200
+                             p-2 text-sm `}><RiSubtractFill />
                             </button>
                             <p className="text-lg font-semibold">{quantity}</p>
-                            <button onClick={() => setQuantity(quantity + 1)} className="btn-sm bg-slate-200 p-3 text-lg"><MdAdd />
+                            <button onClick={() => setQuantity(quantity + 1)} className="btn-sm bg-slate-200 p-2 text-sm"><MdAdd />
                             </button>
                         </div>
 

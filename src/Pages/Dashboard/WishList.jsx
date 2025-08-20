@@ -31,7 +31,7 @@ const WishList = () => {
     return (
         <div className=" ">
             <div>
-                <h1 className="text-xl font-semibold border-b-2 cursor-pointer  border-blue-600 p-2">WishList  : {wishList.length}</h1>
+               
             </div>
             <div className="   grid grid-cols-1 gap-6 ">
                 {

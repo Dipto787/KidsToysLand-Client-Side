@@ -20,6 +20,7 @@ import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
 import AddToys from "../Pages/Dashboard/Admin/AddToys";
 import ManageToys from "../Pages/Dashboard/Admin/ManageToys";
 import UpdateToys from "../Pages/Dashboard/Admin/UpdateToys";
+import Users from "../Pages/Dashboard/Admin/Users";
 const Routes = createBrowserRouter([
     {
         path: '/',
@@ -56,7 +57,7 @@ const Routes = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoute> <DashboardLayout></DashboardLayout></PrivateRoute>,
-          errorElement: <NotFound></NotFound>,
+        errorElement: <NotFound></NotFound>,
         children: [
             {
                 path: 'home',
@@ -92,11 +93,15 @@ const Routes = createBrowserRouter([
             },
             {
                 path: 'manage-toys',
-                element:<VerifyAdmin><ManageToys></ManageToys></VerifyAdmin>
+                element: <VerifyAdmin><ManageToys></ManageToys></VerifyAdmin>
             },
             {
-                path:'update-toy/:id',
-                element:<VerifyAdmin><UpdateToys></UpdateToys></VerifyAdmin>
+                path: 'users',
+                element: <VerifyAdmin><Users></Users></VerifyAdmin>
+            },
+            {
+                path: 'update-toy/:id',
+                element: <VerifyAdmin><UpdateToys></UpdateToys></VerifyAdmin>
             }
         ],
 

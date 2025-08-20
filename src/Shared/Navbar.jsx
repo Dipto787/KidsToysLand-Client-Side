@@ -52,7 +52,7 @@ const Navbar = () => {
     console.log(loading)
     return (
         <div className="pb-20">
-            <div className="navbar px-10 fixed w-full z-30 bg-slate-100  bg-base-100">
+            <div className="navbar lg:px-10 fixed w-full z-30 bg-slate-100  bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -115,7 +115,7 @@ const Navbar = () => {
                             :
 
                             !loading &&
-                            <Link to={'/verify-checkout'} className="btn bg-purple-500 px-8 text-xs text-white font-semibold">Sign In</Link>
+                            <Link to={'/verify-checkout'} className="btn  ml-12 btn-sm  bg-purple-500 lg:px-8 text-xs text-white font-semibold">Sign In</Link>
 
                     }
                 </div>

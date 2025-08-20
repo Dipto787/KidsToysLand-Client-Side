@@ -3,7 +3,7 @@ import UseAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 import { AuthContext } from "../Authentication/AuthProvider";
 import { useContext, useEffect, useState } from "react";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell, ResponsiveContainer } from "recharts";
 import CountUp from "react-countup";
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
@@ -30,8 +30,10 @@ const UserHome = () => {
     })
     let totalSpent = 0;
     payHistory.map(his => {
+        console.log('his', his)
         totalSpent += his.price;
     })
+    console.log('tt,', totalSpent)
 
 
     const chartData = payHistory.map((item, index) => ({
@@ -54,31 +56,57 @@ const UserHome = () => {
 
     return (
         <div>
-            <div className="flex justify-between  border-b-2 p-4 items-center">
+            <div className="flex flex-col lg:flex-row justify-between gap-3  border-b-2 p-4 ">
                 {/* Total Orders */}
-                <div className="bg-[#F3E5F5] px-28 py-3  text-center border-2 text-[#4A148C] ">
-                    <h1 className="text-2xl">Your Orders</h1> 
-                    <p className="text-5xl"> <CountUp end={cart.length + payHistory.length} duration={3} />+</p>
+                <div className="bg-[#F3E5F5] lg:w-full py-3   text-center border-2 text-[#4A148C] ">
+                    <h1 className="text-sm">Your Orders</h1>
+                    <p className="text-xl"> <CountUp end={cart.length + payHistory.length} duration={3} />+</p>
                 </div>
                 {/* Total Orders */}
 
-                <div className="bg-[#FFD700]  px-28 py-3 text-center border-2 text-[#4A148C] ">
-                    <h1 className="text-2xl">WishList</h1> 
-                    <p className="text-5xl"> <CountUp end={wishList.length} duration={3} />+</p>
+                <div className="bg-[#FFD700]  lg:w-full py-3 text-center border-2 text-[#4A148C] ">
+                    <h1 className="text-sm">WishList</h1>
+                    <p className="text-xl"> <CountUp end={wishList.length} duration={3} />+</p>
                 </div>
                 {/* Total Orders */}
 
-                <div className="bg-[#581845] px-20 py-3  text-center border-2 text-[#FAF3E0] ">
-                    <h1 className="text-2xl">Total Spent</h1>
-                    <p className="text-5xl"> <CountUp end={totalSpent.toLocaleString()} duration={2} />+</p>
+                <div className="bg-[#581845] lg:w-full py-3  text-center border-2 text-[#FAF3E0] ">
+                    <h1 className="text-sm">Total Spent</h1>
+                    <p className="text-xl"> $<CountUp end={totalSpent} duration={2} />+</p>
                 </div>
             </div>
 
+            <div className="mt-10 w-full h-[350px]">
+                <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                        data={chartData}
+                        margin={{
+                            top: 20,
+                            right: 30,
+                            left: 20,
+                            bottom: 5,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Bar
+                            dataKey="uv"
+                            fill="#8884d8"
+                            shape={<TriangleBar />}
+                            label={{ position: "top" }}
+                        >
+                            {chartData.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+                            ))}
+                        </Bar>
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
 
-
-            <div className="mt-10 ">
+            {/* <div className="mt-10 ">
                 <BarChart
-                    width={500}
+                    width={900}
                     height={300}
                     data={chartData}
                     margin={{
@@ -97,7 +125,7 @@ const UserHome = () => {
                         ))}
                     </Bar>
                 </BarChart>
-            </div>
+            </div> */}
         </div>
     );
 };

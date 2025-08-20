@@ -17,7 +17,7 @@ const ToysCard = ({ toy }) => {
                     <p className='text-xs'>{toy?.details}</p>
                     <div className='font-semibold'>
                         <p className="text-[#f7a173] text-xs"> ${toy?.price}</p>
-                        <p className='text-xs flex lg:gap-6 gap-1 '>{toy?.sold} sold <span className='text-slate-300'>|</span>   
+                        <p className='text-xs flex lg:gap-2 gap-1 '>{toy?.sold} sold <span className='text-slate-300'>|</span>   
                          <span className='   flex'> 
                             <StarRatings 
                             rating={toy?.rating}

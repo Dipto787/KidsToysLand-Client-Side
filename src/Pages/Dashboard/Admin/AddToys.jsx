@@ -29,8 +29,8 @@ const AddToys = () => {
             let { data } = await axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMGBB_API_KEY}`, imgData);
             let addData = {
                 name: e.name,
-                age: e.age,
                 brand: e.brand,
+                age: e.age,
                 price: e.price,
                 details: e.details,
                 sold: 0,
@@ -39,8 +39,8 @@ const AddToys = () => {
 
             }
 
+            console.log(addData)
             let { data: added } = await axiosSecure.post('/toys', addData)
-            console.log(added)
 
             if (added.insertedId) {
                 let notification = {
@@ -70,8 +70,8 @@ const AddToys = () => {
                 <h1 className="text-xl font-semibold uppercase   text-center ">Add an Toy</h1>
                 <div className="divider w-[50%] mx-auto"></div>
             </div>
-            <form onSubmit={handleSubmit(handleAddToy)} className="bg-[#f3f3f3]  p-10">
-                <div className="grid gap-4 text-xs  grid-cols-2">
+            <form onSubmit={handleSubmit(handleAddToy)} className="bg-[#f3f3f3] w-full p-2 lg:p-10">
+                <div className=" gap-4 text-xs  grid   lg:grid-cols-2">
 
                     <div>
                         <fieldset className="fieldset">
@@ -105,7 +105,7 @@ const AddToys = () => {
                     <div>
                         <fieldset className="fieldset">
                             <legend className="fieldset-legend">age range</legend>
-                            <select defaultValue={``} name="age" className="select w-full" required>
+                            <select defaultValue={``} {...register('age', { required: true })} name="kidsAge" className="select w-full" >
                                 <option disabled >Select Age</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -128,10 +128,10 @@ const AddToys = () => {
                         </fieldset>
                     </div>
 
-                    <div className="col-span-2">
+                    <div className="lg:col-span-2">
                         <fieldset className="fieldset ">
                             <legend className="fieldset-legend">toys details</legend>
-                            <textarea className="textarea h-28  w-full" name="details" placeholder="details..."></textarea>
+                            <textarea {...register('details', { required: true })} className="textarea h-28  w-full" name="details" placeholder="details..."></textarea>
                         </fieldset>
                     </div>
 

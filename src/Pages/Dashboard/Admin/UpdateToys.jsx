@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 const UpdateToys = () => {
     let { id } = useParams();
+    console.log(id)
     let [loading, setLoading] = useState(false);
     let axiosSecure = UseAxiosSecure();
     let { data: toy = {}, refetch, isLoading } = useQuery({
@@ -88,7 +89,7 @@ const UpdateToys = () => {
 
                         <fieldset className="fieldset">
                             <legend className="fieldset-legend">Toy Brands</legend>
-                            <select name="brand"   {...register('brand', { required: true })} defaultValue={''} className="select w-full" >
+                            <select name="brand"   {...register('brand', { required: true })} defaultValue={toy.brand} className="select w-full" >
                                 <option value={toy.brand} >{toy.brand}</option>
                                 <option value="funskool">funskool</option>
                                 <option value="toybilss">toybilss</option>
@@ -108,7 +109,7 @@ const UpdateToys = () => {
                     <div>
                         <fieldset className="fieldset">
                             <legend className="fieldset-legend">age range</legend>
-                            <select defaultValue={``} name="age" className="select w-full" required>
+                            <select defaultValue={toy.age} name="age" className="select w-full" required>
                                 <option value={toy.age} >{toy.age}</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
