@@ -33,11 +33,11 @@ let brands = [
 const OurBrands = () => {
 
     return (
-        <div className=" lg:px-0">
+        <div className=" px-5">
           <SectionTitle title={'Our-Brands'} subtitle={'check our toys brands'}></SectionTitle>
-            <div className="mt-4  grid grid-cols-1 lg:grid-cols-3 gap-6 ">
+            <div className="mt-4  grid grid-cols-1 lg:grid-cols-3 gap-8 ">
                 {
-                    brands.map(brand=> <img className="rounded-xl  w-4/5 mx-auto hover:scale-105 duration-100 cursor-pointer" src={brand.img}></img>)
+                    brands.map(brand=> <img className="rounded-xl  w mx-auto hover:scale-105 duration-100 cursor-pointer" src={brand.img}></img>)
                 }
             </div>
         </div>

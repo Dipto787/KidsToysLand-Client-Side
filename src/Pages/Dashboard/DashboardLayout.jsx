@@ -22,7 +22,7 @@ const DashboardLayout = () => {
         return <Spinner></Spinner>
     }
     return (
-        <div className="max-w-screen-2xl relative  mx-auto">
+        <div className="max-w-screen-2xl bg-white text-black relative  mx-auto">
             <div className={`cursor-pointer  lg:hidden  ml-4 `}>
                 {
                     !isOpen && <IoMenu onClick={() => setIsOpen(!isOpen)} size={30} />
@@ -37,7 +37,7 @@ const DashboardLayout = () => {
                         }
                     </div>
 
-                    {
+                    { 
 
                         !isLoading && user &&
                         (
@@ -99,7 +99,7 @@ const DashboardLayout = () => {
 
                         </ul>
                     }
-                    <div className="divider mt-15"></div>
+                    <div className="divider divider-primary mt-15"></div>
                     <ul className="p-10 space-y-8 mt-">
                         <li ><NavLink to={'/'} className="flex items-center gap-2"><BsFillHouseFill size={22} />Home</NavLink></li>
 

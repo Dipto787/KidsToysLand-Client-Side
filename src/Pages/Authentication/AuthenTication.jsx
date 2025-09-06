@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiSolidHide } from "react-icons/bi";
-import { FaEye, FaGoogle } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AuthContext } from "./AuthProvider";
@@ -9,200 +9,362 @@ import { TbFidgetSpinner } from "react-icons/tb";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
+import { motion } from "framer-motion";
+
 const AuthenTication = () => {
-    let [path, setPath] = useState('login');
-    let [hide, setHide] = useState(true);
-    let [confirmHide, setConfirmHide] = useState(true);
-    let { createAccount, loading, continueWithGoogle, setLoading, updateUserProfile, signUp } = useContext(AuthContext);
-    let location = useLocation();
-    let [pending, setPending] = useState(false);
-    const {
-        register,
-        handleSubmit,
-        reset,
-        watch,
-        formState: { errors },
-    } = useForm();
-    const pass = watch('password');
-    const confirmPass = watch('confirmPassword');
-    const passwordsMatch = pass === confirmPass;
-    let navigator = location?.state ? location.state : '/';
+  let [path, setPath] = useState("login");
+  let [hide, setHide] = useState(true);
+  let [confirmHide, setConfirmHide] = useState(true);
+  let { createAccount, loading, continueWithGoogle, setLoading, updateUserProfile, signUp } =
+    useContext(AuthContext);
+  let location = useLocation();
+  let [pending, setPending] = useState(false);
 
-    let navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-    const onRegisterSubmit = async (e) => {
+  const pass = watch("password");
+  const confirmPass = watch("confirmPassword");
+  const passwordsMatch = pass === confirmPass;
+  let navigator = location?.state ? location.state : "/";
+  let navigate = useNavigate();
 
-        try {
-            let formData = new FormData();
-            formData.append('image', e.photo[0])
-            console.log(formData)
-            setPending(true);
-            let { data } = await axios.post(`https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMGBB_API_KEY}`, formData);
-            console.log(data);
+  // Register Submit
+  const onRegisterSubmit = async (e) => {
+    try {
+      let formData = new FormData();
+      formData.append("image", e.photo[0]);
+      setPending(true);
 
-            const result = await createAccount(e.email, e.password);
-            await updateUserProfile(e.name, data.data.display_url);
-            if (result) {
-                Swal.fire({
-                    title: "Successful To Register!",
-                    icon: "success",
-                    draggable: true
-                });
-                navigate(navigator);
-                setPending(false);
-                setLoading(false);
-            }
+      let { data } = await axios.post(
+        `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMGBB_API_KEY}`,
+        formData
+      );
 
-            reset();
-        } catch (err) {
-            toast.error(err.message);
-            setLoading(false);
-            setPending(false);
-        }
+      const result = await createAccount(e.email, e.password);
+      await updateUserProfile(e.name, data.data.display_url);
+      if (result) {
+        Swal.fire({
+          title: "Registration Successful!",
+          icon: "success",
+        });
+        navigate(navigator);
+      }
+
+      setPending(false);
+      setLoading(false);
+      reset();
+    } catch (err) {
+      toast.error(err.message);
+      setLoading(false);
+      setPending(false);
     }
+  };
 
-    console.log('match', passwordsMatch)
-    const handleLoginSubmit = async (e) => {
-        if (!passwordsMatch) {
-            return;
-        }
-        try {
-            console.log(e)
-            const result = await signUp(e.loginEmail, e.LoginPassword);
-            if (result) {
-                Swal.fire({
-                    title: "Successful To Sign In!",
-                    icon: "success",
-                    draggable: true
-                });
-                navigate(navigator);
-                setLoading(false);
-            }
-        } catch (err) {
-            toast.error(err.message)
-            setLoading(false);
-        }
+  // Login Submit
+  const handleLoginSubmit = async (e) => {
+    try {
+      const result = await signUp(e.loginEmail, e.LoginPassword);
+      if (result) {
+        Swal.fire({
+          title: "Login Successful!",
+          icon: "success",
+        });
+        navigate(navigator);
+        setLoading(false);
+      }
+    } catch (err) {
+      toast.error(err.message);
+      setLoading(false);
     }
+  };
 
-    let handleContinueWithGoogle = async () => {
-        let res = await continueWithGoogle()
-        toast.success('success to login');
-        navigate(navigator)
-    }
+  let handleContinueWithGoogle = async () => {
+    let res = await continueWithGoogle();
+    toast.success("Google Sign-in Successful");
+    navigate(navigator);
+  };
 
-    return (
-        <div className="max-w-4xl my-20 m-auto">
-            <div className="border shadow-xl py-5  rounded-xl   ">
-                <div className="flex px-10 justify-between">
-                    <h1 onClick={() => setPath('login')} className={` ${path === 'login' ? 'text-purple-600 font-bold border-b-4   border-red-500' : 'opacity-35'} text-xl duration-200 cursor-pointer py-3 font-semibold`}>LOGIN</h1>
-                    <h1 onClick={() => setPath('register')} className={` ${path === 'register' ? 'text-purple-600 font-bold border-b-4  border-red-500' : 'opacity-35'} text-xl cursor-pointer duration-200 py-3 font-semibold`}>REGISTER</h1>
+  return (
+    <div className="min-h-screen flex p-4  items-center justify-center bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="w-full max-w-3xl bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden"
+      >
+        {/* Tabs */}
+        <div className="flex justify-around border-b bg-gradient-to-r from-purple-50 to-pink-50">
+          <button
+            onClick={() => setPath("login")}
+            className={`w-1/2 py-4 text-lg font-semibold transition-all ${
+              path === "login"
+                ? "text-purple-700 border-b-4 border-purple-600"
+                : "text-gray-400"
+            }`}
+          >
+            Login
+          </button>
+          <button
+            onClick={() => setPath("register")}
+            className={`w-1/2 py-4 text-lg font-semibold transition-all ${
+              path === "register"
+                ? "text-purple-700 border-b-4 border-purple-600"
+                : "text-gray-400"
+            }`}
+          >
+            Register
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="p-8 md:p-12">
+          {path === "login" ? (
+            // ---------------- LOGIN ----------------
+            <form
+              onSubmit={handleSubmit(handleLoginSubmit)}
+              className="space-y-6"
+            >
+              <div>
+                <label className="block text-gray-600 font-semibold mb-2">
+                  Email
+                </label>
+                <input
+                  {...register("loginEmail", { required: true })}
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full input bg-white input-bordered focus:ring-2 focus:ring-purple-400"
+                />
+                {errors.loginEmail && (
+                  <p className="text-red-500 text-sm mt-1">Email is required</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-gray-600 font-semibold mb-2">
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    {...register("LoginPassword", { required: true })}
+                    type={hide ? "password" : "text"}
+                    placeholder="Enter password"
+                    className="w-full input bg-white input-bordered focus:ring-2 focus:ring-purple-400"
+                  />
+                  <span
+                    onClick={() => setHide(!hide)}
+                    className="absolute right-3 top-3 cursor-pointer text-xl text-gray-500"
+                  >
+                    {hide ? <FaEye /> : <BiSolidHide />}
+                  </span>
                 </div>
+                {errors.LoginPassword && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Password is required
+                  </p>
+                )}
+              </div>
 
-                <div className="py-1">
+              <p className="text-blue-600 underline cursor-pointer">
+                Forgot Password?
+              </p>
 
-                    {path === 'login' ?
-                        <div className=" mt-7  px-10 mx-auto  ">
-                            <div className="  text-xs w-full  ">
-                                <form onSubmit={handleSubmit(handleLoginSubmit)} className=" ">
-                                    <fieldset className="fieldset relative">
-                                        <label className="label text-stone-500 font-semibold text-xl">Email</label>
-                                        <input {...register('loginEmail', { required: true })} type="email" name="loginEmail" className="input  w-full " placeholder="Enter Your Email here" />
-                                        {errors.loginEmail && <span className="text-red-500 text-lg font-bold p-2">Email is required</span>}
-                                        <label className="label mt-3  text-stone-500 font-semibold text-xl">  Password</label>
+              <button
+                disabled={loading}
+                className="w-full btn bg-purple-600 hover:bg-purple-700 text-white text-lg"
+              >
+                {loading ? <TbFidgetSpinner className="animate-spin" /> : "Sign In"}
+              </button>
 
-                                        <label className={`input border-red-500 validator w-full ${pass === confirmPass && 'border-green-400'} `}>
-                                            <input
-                                                {...register('LoginPassword', { required: true })} type={`${hide ? 'password' : 'text'}`} className="w-full" name="LoginPassword" placeholder="Password" />
-                                            <p onClick={() => setHide(!hide)} className={'text-xl cursor-pointer'}>{hide ? <FaEye /> :
-                                                <BiSolidHide />}</p>
-                                        </label>
-                                        {errors.LoginPassword && <span className="text-red-500 text-lg font-bold p-2">Password is required</span>}
-                                        <p className="underline text-lg font-semibold text-blue-600 cursor-pointer py-2">Forget Password</p>
+              <p className="text-center text-sm">
+                Don’t have an account?{" "}
+                <span
+                  onClick={() => setPath("register")}
+                  className="text-purple-600 cursor-pointer font-semibold underline"
+                >
+                  Sign Up
+                </span>
+              </p>
 
-                                        <button disabled={loading} className="btn bg-lime-600 text-xl py-3 text-white mt-4">{loading ? <TbFidgetSpinner className="animate-spin" /> : 'Sign In'}</button>
-                                    </fieldset>
-                                    <p className="text-xl text-center my-5">Don't Have an Account? Please <Link className="underline text-purple-500 font-semibold " onClick={() => setPath('register')}>Sign Up</Link></p>
-                                </form>
-                                <div className="divider"></div>
-                                <div>
-                                    <button disabled={loading} onClick={handleContinueWithGoogle} className="btn p-6 w-full text-lg"> Continue With <FcGoogle size={21} /></button>
-                                </div>
-                            </div>
-                        </div>
-                        :
-                        <div className=" mt-7 px-10 mx-auto">
-                            <div className="text-xs  w-full   ">
-                                <form onSubmit={handleSubmit(onRegisterSubmit)} className=" ">
-                                    <fieldset className="fieldset text-xs space-y-2 relative">
-                                        <label className="label  text-stone-500 font-semibold text-xs">Name</label>
-                                        <input  {...register("name", { required: true })} type="text" name="name" className="input w-full" placeholder="Your Name..." />
+              <div className="divider">OR</div>
+              <button
+                type="button"
+                onClick={handleContinueWithGoogle}
+                className="w-full btn border text-lg flex items-center justify-center gap-2"
+              >
+                <FcGoogle size={22} /> Continue with Google
+              </button>
+            </form>
+          ) : (
+            // ---------------- REGISTER ----------------
+            <form
+              onSubmit={handleSubmit(onRegisterSubmit)}
+              className="space-y-6"
+            >
+              <div>
+                <label className="block text-gray-600 font-semibold mb-2">
+                  Name
+                </label>
+                <input
+                  {...register("name", { required: true })}
+                  type="text"
+                  placeholder="Enter your name"
+                  className="w-full input bg-white input-bordered focus:ring-2 focus:ring-purple-400"
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">Name is required</p>
+                )}
+              </div>
 
-                                        {errors.name && <span className="text-red-500 text-lg font-bold p-2">Name is required</span>}
+              <div>
+                <label className="block text-gray-600 font-semibold mb-2">
+                  Email
+                </label>
+                <input
+                  {...register("email", { required: true })}
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full input bg-white input-bordered focus:ring-2 focus:ring-purple-400"
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">Email is required</p>
+                )}
+              </div>
 
+              <div>
+                <label className="block text-gray-600 font-semibold mb-2">
+                  Upload Image
+                </label>
+                <input
+                  {...register("photo", { required: true })}
+                  type="file"
+                  className="file-input bg-white w-full"
+                />
+                {errors.photo && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Profile photo is required
+                  </p>
+                )}
+              </div>
 
-                                        <label className="label text-stone-500 font-semibold text-xs">Email</label>
-                                        <input  {...register('email', { required: true })} type="email" name="email" className="input w-full " placeholder="Enter Your Email here" />
+              <div>
+                <label className="block text-gray-600 font-semibold mb-2">
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    {...register("password", { required: true })}
+                    type={hide ? "password" : "text"}
+                    placeholder="Enter password"
+                    className="w-full input bg-white input-bordered focus:ring-2 focus:ring-purple-400"
+                  />
+                  <span
+                    onClick={() => setHide(!hide)}
+                    className="absolute right-3 top-3 cursor-pointer text-xl text-gray-500"
+                  >
+                    {hide ? <FaEye /> : <BiSolidHide />}
+                  </span>
+                </div>
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Password is required
+                  </p>
+                )}
+              </div>
 
-                                        {errors.email && <span className="text-red-500 text-lg font-bold p-2">Email is required</span>}
+              <div>
+                <label className="block text-gray-600 font-semibold mb-2">
+                  Confirm Password
+                </label>
+                <div className="relative">
+                  <input
+                    {...register("confirmPassword", { required: true })}
+                    type={confirmHide ? "password" : "text"}
+                    placeholder="Re-enter password"
+                    className="w-full input bg-white input-bordered focus:ring-2 focus:ring-purple-400"
+                  />
+                  <span
+                    onClick={() => setConfirmHide(!confirmHide)}
+                    className="absolute right-3 top-3 cursor-pointer text-xl text-gray-500"
+                  >
+                    {confirmHide ? <FaEye /> : <BiSolidHide />}
+                  </span>
+                </div>
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Confirm password is required
+                  </p>
+                )}
+                {pass && passwordsMatch ? (
+                  <p className="text-green-600 text-sm mt-1">
+                    ✅ Passwords match
+                  </p>
+                ) : (
+                  <p className="text-red-500 text-sm mt-1">
+                    ❌ Passwords do not match
+                  </p>
+                )}
+              </div>
 
-                                        <label className="label text-stone-500 font-semibold text-xs">Upload Img</label>
-                                        <input {...register('photo', { required: true })} type="file" name="photo" className="file-input w-full" />
-                                        {errors.photo && <span className="text-red-500 text-lg font-bold p-2">Photo is required</span>}
+              <div className="flex items-center gap-2">
+                <input
+                  {...register("checked", { required: true })}
+                  type="checkbox"
+                  className="checkbox"
+                />
+                <p className="text-sm">
+                  Accept our{" "}
+                  <span className="underline text-purple-600">
+                    Terms & Conditions
+                  </span>
+                </p>
+              </div>
+              {errors.checked && (
+                <p className="text-red-500 text-sm mt-1">
+                  You must accept our terms and conditions
+                </p>
+              )}
 
+              <button
+                disabled={loading || pending}
+                className="w-full btn bg-purple-600 hover:bg-purple-700 text-white text-lg"
+              >
+                {loading || pending ? (
+                  <TbFidgetSpinner className="animate-spin" />
+                ) : (
+                  "Sign Up"
+                )}
+              </button>
 
-                                        <label className="label mt-3  text-stone-500 font-semibold text-xs">  Password</label>
+              <p className="text-center text-sm">
+                Already have an account?{" "}
+                <span
+                  onClick={() => setPath("login")}
+                  className="text-purple-600 cursor-pointer font-semibold underline"
+                >
+                  Sign In
+                </span>
+              </p>
 
-                                        <label className={`input validator w-full `}>
-                                            <input
-                                                {...register('password', { required: true })} type={`${hide ? 'password' : 'text'}`} className="    w-full" name="password" placeholder="Password" />
-                                            <p onClick={() => setHide(!hide)} className={'text-xs cursor-pointer'}>{hide ? <FaEye /> :
-                                                <BiSolidHide />}</p>
-                                        </label>
-
-
-                                        {errors.password && <span className="text-red-500 text-lg font-bold p-2">Password is required!</span>}
-
-                                        <label className="label mt-3  text-stone-500 font-semibold text-xs"> Confirm Password</label>
-
-                                        <label className={`input validator w-full `}>
-
-                                            <input   {...register('confirmPassword', { required: true })} type={`${confirmHide ? 'password' : 'text'}`} className=" w-full" placeholder=" Confirm Password" name="confirmPassword" />
-                                            <p onClick={() => setConfirmHide(!confirmHide)} className={` text-xs $ text-black  cursor-pointer  `}>{confirmHide ? <FaEye /> :
-                                                <BiSolidHide />}</p>
-                                        </label>
-
-
-                                        {errors.confirmPassword && <span className="text-red-500 font-bold text-xs p-2">Retype password is required</span>}
-
-                                        <p className="text-xs text-red-500">
-                                            {pass && passwordsMatch ? <p className="text-green-500">✅ Passwords match </p> : "❌ Passwords do not match"}
-                                        </p>
-
-
-
-                                        <div className="flex items-center">
-                                            <input       {...register('checked', { required: true })} name="checked" type="checkbox" className="checkbox" />
-
-                                            <p className=" ml-4 text-xs text-black ">Accept Our <span className="underline text-violet-800">Terms and Conditions</span></p>
-                                        </div>
-                                        {errors.checked && <span className="text-red-500 font-bold p-2">You have to agree with our terms and conditions!</span>}
-                                        <button disabled={loading || pending} className="btn bg-lime-600 text-xl py-3 text-white mt-4">{loading || pending ? <TbFidgetSpinner className="animate-spin" />
-                                            : 'Sign Up'}</button>
-                                    </fieldset>
-                                    <p className="text-xs text-center my-5">Already Have an Account? Please <Link className="underline text-purple-500 font-semibold " onClick={() => setPath('login')}>Sign In</Link></p>
-                                </form>
-
-                                <div className="divider"></div>
-                                <div>
-                                    <button disabled={loading} onClick={handleContinueWithGoogle} className="btn p-6 w-full text-xs"> Continue With <FcGoogle size={21} /></button>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div >
-            </div >
-        </div >
-    );
+              <div className="divider">OR</div>
+              <button
+                type="button"
+                onClick={handleContinueWithGoogle}
+                className="w-full btn bg-white text-black border text-lg flex items-center justify-center gap-2"
+              >
+                <FcGoogle size={22} /> Continue with Google
+              </button>
+            </form>
+          )}
+        </div>
+      </motion.div>
+    </div>
+  );
 };
 
 export default AuthenTication;

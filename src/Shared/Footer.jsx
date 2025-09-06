@@ -1,59 +1,85 @@
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
-    return (
-        <footer className="p-6 dark:bg-gray-100 bg-slate-200 dark:text-gray-800">
-            <div className="container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
-                <div className="flex flex-col space-y-4">
-                    <h2 className="font-medium">Getting started</h2>
-                    <div className="flex flex-col space-y-2 text-xs dark:text-gray-600">
-                        <a rel="noopener noreferrer" href="#">Installation</a>
-                        <a rel="noopener noreferrer" href="#">Release Notes</a>
-                        <a rel="noopener noreferrer" href="#">Upgrade Guide</a>
-                        <a rel="noopener noreferrer" href="#">Using with Preprocessors</a>
-                        <a rel="noopener noreferrer" href="#">Optimizing for Production</a>
-                        <a rel="noopener noreferrer" href="#">Browser Support</a>
-                        <a rel="noopener noreferrer" href="#">IntelliSense</a>
-                    </div>
-                </div>
-                <div className="flex flex-col space-y-4">
-                    <h2 className="font-medium">Core Concepts</h2>
-                    <div className="flex flex-col space-y-2 text-xs dark:text-gray-600">
-                        <a rel="noopener noreferrer" href="#">Utility-First</a>
-                        <a rel="noopener noreferrer" href="#">Responsive Design</a>
-                        <a rel="noopener noreferrer" href="#">Hover, Focus, &amp; Other States</a>
-                        <a rel="noopener noreferrer" href="#">Dark Mode</a>
-                        <a rel="noopener noreferrer" href="#">Adding Base Styles</a>
-                        <a rel="noopener noreferrer" href="#">Extracting Components</a>
-                        <a rel="noopener noreferrer" href="#">Adding New Utilities</a>
-                    </div>
-                </div>
-                <div className="flex flex-col space-y-4">
-                    <h2 className="font-medium">Customization</h2>
-                    <div className="flex flex-col space-y-2 text-xs dark:text-gray-600">
-                        <a rel="noopener noreferrer" href="#">Configuration</a>
-                        <a rel="noopener noreferrer" href="#">Theme Configuration</a>
-                        <a rel="noopener noreferrer" href="#">Breakpoints</a>
-                        <a rel="noopener noreferrer" href="#">Customizing Colors</a>
-                        <a rel="noopener noreferrer" href="#">Customizing Spacing</a>
-                        <a rel="noopener noreferrer" href="#">Configuring Variants</a>
-                        <a rel="noopener noreferrer" href="#">Plugins</a>
-                    </div>
-                </div>
-                <div className="flex flex-col space-y-4">
-                    <h2 className="font-medium">Community</h2>
-                    <div className="flex flex-col space-y-2 text-xs dark:text-gray-600">
-                        <a rel="noopener noreferrer" href="#">GitHub</a>
-                        <a rel="noopener noreferrer" href="#">Discord</a>
-                        <a rel="noopener noreferrer" href="#">Twitter</a>
-                        <a rel="noopener noreferrer" href="#">YouTube</a>
-                    </div>
-                </div>
-            </div>
-            <div className="flex items-center justify-center px-6 pt-12 text-xs">
-                <span className="dark:text-gray-600">© Copyright 1986. All Rights Reserved.</span>
-            </div>
-        </footer>
-    );
+  return (
+    <footer className="bg-slate-900 text-gray-300">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+        {/* Brand */}
+        <div>
+          <h2 className="text-2xl font-bold text-white mb-4">KidsToysLand 🌈</h2>
+          <p className="text-sm leading-6">
+            Bringing happiness, creativity, and imagination to kids everywhere
+            with fun, safe, and high-quality toys. ❤️
+          </p>
+          {/* Socials */}
+          <div className="flex gap-4 mt-6">
+            <a
+              href="#"
+              className="bg-slate-800 p-2 rounded-full hover:bg-[#f85606] transition"
+            >
+              <FaFacebookF />
+            </a>
+            <a
+              href="#"
+              className="bg-slate-800 p-2 rounded-full hover:bg-[#f85606] transition"
+            >
+              <FaTwitter />
+            </a>
+            <a
+              href="#"
+              className="bg-slate-800 p-2 rounded-full hover:bg-[#f85606] transition"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="#"
+              className="bg-slate-800 p-2 rounded-full hover:bg-[#f85606] transition"
+            >
+              <FaYoutube />
+            </a>
+          </div>
+        </div>
+
+        {/* Company */}
+        <div>
+          <h3 className="text-lg font-semibold text-white mb-4">Company</h3>
+          <ul className="space-y-2 text-sm">
+            <li><a href="#" className="hover:text-[#f85606] transition">About Us</a></li>
+            <li><a href="#" className="hover:text-[#f85606] transition">Our Mission</a></li>
+            <li><a href="#" className="hover:text-[#f85606] transition">Our Vision</a></li>
+            <li><a href="#" className="hover:text-[#f85606] transition">Careers</a></li>
+          </ul>
+        </div>
+
+        {/* Shop */}
+        <div>
+          <h3 className="text-lg font-semibold text-white mb-4">Shop</h3>
+          <ul className="space-y-2 text-sm">
+            <li><a href="#" className="hover:text-[#f85606] transition">All Toys</a></li>
+            <li><a href="#" className="hover:text-[#f85606] transition">By Age</a></li>
+            <li><a href="#" className="hover:text-[#f85606] transition">By Brand</a></li>
+            <li><a href="#" className="hover:text-[#f85606] transition">Special Offers</a></li>
+          </ul>
+        </div>
+
+        {/* Support */}
+        <div>
+          <h3 className="text-lg font-semibold text-white mb-4">Support</h3>
+          <ul className="space-y-2 text-sm">
+            <li><a href="#" className="hover:text-[#f85606] transition">FAQs</a></li>
+            <li><a href="#" className="hover:text-[#f85606] transition">Contact Us</a></li>
+            <li><a href="#" className="hover:text-[#f85606] transition">Shipping & Returns</a></li>
+            <li><a href="#" className="hover:text-[#f85606] transition">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-gray-700 mt-8 py-4 text-center text-sm text-gray-400">
+        © {new Date().getFullYear()} KidsToysLand. All Rights Reserved. 🌟
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;

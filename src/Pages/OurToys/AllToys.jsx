@@ -3,167 +3,164 @@ import UseAxiosSecure from "../../hooks/useAxiosSecure";
 import Spinner from "../../Shared/Spinner";
 import ToysCard from "../../Shared/ToysCard";
 import { useEffect, useState } from "react";
-import notFound from '../../assets/not found/no found.png'
-import { useNavigate, useSearchParams } from "react-router-dom";
+import notFound from "../../assets/not found/no found.png";
+import { useNavigate } from "react-router-dom";
 import queryString from "query-string";
+
 let brands = [
+  { brand: "Frank" },
+  { brand: "Winfun" },
+  { brand: "Funskool" },
+  { brand: "Majorette" },
+  { brand: "Toybilss" },
+  { brand: "Fisher-Price" },
+  { brand: "Challenge Accepted" },
+];
 
-    { "brand": "Frank" },
-    { "brand": "Winfun" },
-    { "brand": "Funskool" },
-    { "brand": "Majorette" },
-    { "brand": "Toybilss" },
-    { "brand": "Fisher-Price" },
-    { "brand": "Challenge Accepted" }
-
-]
 const AllToys = () => {
+  let navigate = useNavigate();
+  let axiosSecure = UseAxiosSecure();
 
-    let navigate = useNavigate(); 
-    let axiosSecure = UseAxiosSecure();
-    const [CurrentPage, setPage] = useState(0);
-    const [perPage, setPerPage] = useState(8);
-    const [count, setCount] = useState(0);
-    let [brand, setBrand] = useState('');
-    let [age, setAge] = useState('');
-    let [search, setSearch] = useState('');
-    useEffect(() => {
+  const [CurrentPage, setPage] = useState(0);
+  const [perPage, setPerPage] = useState(20);
+  const [count, setCount] = useState(0);
 
-        axiosSecure.get(`/toys-count?brand=${brand}&&search=${search}&&age=${age}`).then(res => {
-            setCount(res.data.count); 
-        });
-        setPage(0)
+  let [brand, setBrand] = useState("");
+  let [age, setAge] = useState("");
+  let [search, setSearch] = useState("");
 
-    }, [brand, search, age]);
+  // Fetch count
+  useEffect(() => {
+    axiosSecure
+      .get(`/toys-count?brand=${brand}&&search=${search}&&age=${age}`)
+      .then((res) => {
+        setCount(res.data.count);
+      });
+    setPage(0);
+  }, [brand, search, age]);
 
+  // Fetch toys
+  let { data: toys = [], isLoading } = useQuery({
+    queryKey: ["toys", CurrentPage, perPage, brand, search, age],
+    queryFn: async () => {
+      let { data } = await axiosSecure.get(
+        `/our-toys?page=${CurrentPage}&&size=${perPage}&&brand=${brand}&&search=${search}&&age=${age}`
+      );
+      return data;
+    },
+  });
 
-    let { data: toys = [], isLoading, refetch } = useQuery({
-        queryKey: ['toys', CurrentPage, perPage, brand, search, age],
-        queryFn: async () => {
-            let { data } = await axiosSecure.get(`/our-toys?page=${CurrentPage}&&size=${perPage}&&brand=${brand}&&search=${search}&&age=${age}`);
-              
-            return data;
-        }
-    })
+  let pages = [...Array(Math.ceil(count / perPage)).keys()];
 
+  // URL Sync
+  useEffect(() => {
+    const query = {
+      page: CurrentPage,
+      brand: brand || undefined,
+      age: age || undefined,
+      search: search || undefined,
+    };
+    const newUrl = queryString.stringifyUrl({ url: "/our-toys", query });
+    navigate(newUrl, { replace: true });
+  }, [brand, age, search, CurrentPage]);
 
+  return (
+    <div className="px-3 lg:px-10 py-8">
+      {/* Filter Section */}
+      <div className="my-8 flex flex-col lg:flex-row gap-5 bg-[#f85606] p-5 rounded-xl justify-between items-center">
+        {/* Brand Filter */}
+        <select
+          onChange={(e) => setBrand(e.target.value)}
+          className="border bg-white text-black border-orange-400 px-4 py-2 rounded-lg shadow-sm w-full lg:w-56"
+          defaultValue={"Select Brand"}
+        >
+          <option disabled>Select Brand</option>
+          {brands.map((brand, idx) => (
+            <option key={idx} value={brand.brand}>
+              {brand.brand}
+            </option>
+          ))}
+        </select>
 
-    let pages = [...Array(Math.ceil(count / perPage)).keys()];
-    useEffect(() => {
-        const query = {
-            page: CurrentPage,
-            brand: brand || undefined,
-            age: age || undefined,
-            search: search || undefined
-        };
-        const newUrl = queryString.stringifyUrl({ url: "/our-toys", query });
-        navigate(newUrl, { replace: true }); 
-    }, [brand, age, search, CurrentPage]);
-    return (
-        <div>
-            <div className='flex  px-3 flex-col'>
-                <div className="my-10 lg:flex flex-col lg:flex-row  bg-[#f85606] p-5 rounded-lg justify-between">
-                    <div className="hidden lg:flex">
-                        <select onChange={(e) => setBrand(e.target.value)} className="border-2 border-orange-400 p-2" defaultValue={'Select Brand'} name="brand" id="">
-                            <option disabled>Select Brand</option>
+        {/* Search */}
+        <label className="flex items-center gap-2 border bg-white text-black px-4 py-2 rounded-lg shadow-sm w-full lg:w-80">
+          <svg
+            className="h-5 w-5 opacity-70"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <g
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              strokeWidth="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </g>
+          </svg>
+          <input
+            className="w-full bg-transparent outline-none text-black"
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
+            type="search"
+            placeholder="Search Toys..."
+          />
+        </label>
 
-                            {
-                                brands.map(brand => <option value={brand.brand}>{brand.brand}</option>)
-                            }
+        {/* Age Filter */}
+        <select
+          onChange={(e) => setAge(e.target.value)}
+          className="border bg-white text-black border-pink-400 px-4 py-2 rounded-lg shadow-sm w-full lg:w-56"
+          defaultValue={"Select Age"}
+        >
+          <option disabled>Select Age</option>
+          {[2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+            <option key={num} value={num}>
+              {num}
+            </option>
+          ))}
+        </select>
+      </div>
 
-                        </select>
-                    </div>
-                    <div className="text-center">
-                        <label className="input px-20">
-                            <svg className="h-[1em]  opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <g
-                                    strokeLinejoin="round"
-                                    strokeLinecap="round"
-                                    strokeWidth="2.5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                >
-                                    <circle cx="11" cy="11" r="8"></circle>
-                                    <path d="m21 21-4.3-4.3"></path>
-                                </g>
-                            </svg>
-                            <input className="w-full" onChange={(e) => setSearch(e.target.value.toLocaleLowerCase())} type="search " required placeholder="Search" />
-                        </label>
-                    </div>
-
-                    <div className="hidden lg:flex">
-                        <select onChange={(e) => setAge(e.target.value)} className="border-2 border-pink-400 p-2" defaultValue={'Select Age'} name="age" id="">
-                            <option disabled>Select Age</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                        </select>
-                    </div>
-
-                </div>
-
-                <div className="flex  lg:hidden justify-between lg:px-10 mb-5">
-                    <div>
-                        <select onChange={(e) => setBrand(e.target.value)} className="border-2 lg:text-sm text-xs border-orange-400 p-2" defaultValue={'Select Brand'} name="brand" id="">
-                            <option disabled>Select Brand</option>
-                            <option value="funskool">funskool</option>
-                            <option value="toybilss">toybilss</option>
-                            <option value="challenge accepted">challenge accepted</option>
-                            <option value="winfun">winfun</option>
-                            <option value="frank">frank</option>
-                            <option value="fisher-price">fisher-price</option>
-                            <option value="majorette">majorette</option>
-                            <option value="zepltyr">zepltyr</option>
-                            <option value="sold">sold</option>
-
-                        </select>
-                    </div>
-
-                    {/*  */}
-                    <div className=" ">
-                        <select onChange={(e) => setAge(e.target.value)} className="border-2 border-pink-400 p-2  lg:text-sm text-xs" defaultValue={'Select Age'} name="age" id="">
-                            <option disabled>Select Age</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                        </select>
-                    </div>
-                </div>
-
-                {
-                    isLoading ? <Spinner></Spinner> :
-                        toys.length === 0 ? <div className="flex flex-col items-center p-28  justify-center"> <img src={notFound} className="" alt="" /> <h1 className="text-4xl text-center  mt-4" >Not Data Available!!</h1></div> :
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-
-                                {
-
-
-
-                                    toys.map(toy => <ToysCard toy={toy}></ToysCard>)
-
-                                }
-                            </div>
-                }
-            </div>
-
-            <div className="my-10 text-center space-x-4">
-                {
-                    pages.map(page => <button onClick={() => setPage(page)} className={`btn ${page == CurrentPage ? 'bg-blue-600 text-white font-semibold' : ''}`}>{page}</button>)
-                }
-            </div>
-
+      {/* Toys Section */}
+      {isLoading ? (
+        <Spinner />
+      ) : toys.length === 0 ? (
+        <div className="flex flex-col items-center p-20 justify-center">
+          <img src={notFound} alt="Not Found" className="w-60" />
+          <h1 className="text-2xl lg:text-4xl text-center mt-6 font-semibold text-gray-700">
+            No Data Available!!
+          </h1>
         </div>
-    );
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+          {toys.map((toy, idx) => (
+            <ToysCard key={idx} toy={toy} />
+          ))}
+        </div>
+      )}
+
+      {/* Pagination */}
+      {pages.length > 1 && (
+        <div className="my-10 text-center space-x-2">
+          {pages.map((page) => (
+            <button
+              key={page}
+              onClick={() => setPage(page)}
+              className={`px-4 py-2 rounded-lg border shadow-sm transition ${
+                page === CurrentPage
+                  ? "bg-blue-600 text-white font-semibold"
+                  : "bg-white text-black border-gray-300 hover:bg-gray-100"
+              }`}
+            >
+              {page + 1}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default AllToys;

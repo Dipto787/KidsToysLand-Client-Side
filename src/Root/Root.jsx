@@ -6,7 +6,7 @@ const Root = () => {
     let location = useLocation();
     let unable = (location.pathname === '/verify-checkout');
     return (
-        <div>
+        <div className="bg-white text-black">
             { <Navbar></Navbar>}
             <div className=" min-h-[calc(64.40vh-68px)] max-w-7xl mx-auto">
                 <Outlet></Outlet>
